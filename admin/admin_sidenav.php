@@ -17,11 +17,39 @@
     <ul id="service-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
 
 
-      <li>
-        <a href="components-tooltips.html">
-          <i class="bi bi-circle"></i><span>Tooltips</span>
+    <li>
+        <a href="services_details.php">
+          <i class="bi bi-circle"></i><span>List of Services</span>
         </a>
       </li>
+
+
+      <li>
+        <a href="components-tooltips.html">
+          <i class="bi bi-circle"></i><span>Schedule Service</span>
+        </a>
+      </li>
+
+
+
+      <li>
+        <a href="components-tooltips.html">
+          <i class="bi bi-circle"></i><span>View Appointments</span>
+        </a>
+      </li>
+
+      <li>
+        <a href="components-tooltips.html">
+          <i class="bi bi-circle"></i><span>Manage Work Orders</span>
+        </a>
+      </li>
+
+      <li>
+        <a href="components-tooltips.html">
+          <i class="bi bi-circle"></i><span>Techinician Assignment</span>
+        </a>
+      </li>
+
     </ul>
   </li><!-- End Components Nav -->
 
@@ -32,55 +60,33 @@
       <i class="bi bi-menu-button-wide"></i><span>Inventory Management</span><i class="bi bi-chevron-down ms-auto"></i>
     </a>
     <ul id="Inventory-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+    <li>
+        <a href="parts_page.php">
+          <i class="bi bi-circle"></i><span>Add/Edit Parts</span>
+        </a>
+      </li>
 
       <li>
-        <a href="components-buttons.html">
-          <i class="bi bi-circle"></i><span>Buttons</span>
+        <a href="components-tooltips.html">
+          <i class="bi bi-circle"></i><span>View Stock Levels</span>
         </a>
       </li>
-      <li>
-        <a href="components-cards.html">
-          <i class="bi bi-circle"></i><span>Cards</span>
-        </a>
-      </li>
-      <li>
-        <a href="components-carousel.html">
-          <i class="bi bi-circle"></i><span>Carousel</span>
-        </a>
-      </li>
-      <li>
-        <a href="components-list-group.html">
-          <i class="bi bi-circle"></i><span>List group</span>
-        </a>
-      </li>
-      <li>
-        <a href="components-modal.html">
-          <i class="bi bi-circle"></i><span>Modal</span>
-        </a>
-      </li>
-      <li>
-        <a href="components-tabs.html">
-          <i class="bi bi-circle"></i><span>Tabs</span>
-        </a>
-      </li>
-      <li>
-        <a href="components-pagination.html">
-          <i class="bi bi-circle"></i><span>Pagination</span>
-        </a>
-      </li>
-      <li>
-        <a href="components-progress.html">
-          <i class="bi bi-circle"></i><span>Progress</span>
-        </a>
-      </li>
-      <li>
-        <a href="components-spinners.html">
-          <i class="bi bi-circle"></i><span>Spinners</span>
-        </a>
-      </li>
+
+
+
+
+
       <li>
         <a href="components-tooltips.html">
-          <i class="bi bi-circle"></i><span>Tooltips</span>
+          <i class="bi bi-circle"></i><span>Reorder Parts</span>
+        </a>
+      </li>
+
+
+
+      <li>
+        <a href="components-tooltips.html">
+          <i class="bi bi-circle"></i><span>Incoming Shipments</span>
         </a>
       </li>
     </ul>
@@ -94,74 +100,22 @@
     <ul id="Supplier-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
       <li>
         <a href="components-alerts.html">
-          <i class="bi bi-circle"></i><span>Alerts</span>
+          <i class="bi bi-circle"></i><span>Supplier Information</span>
         </a>
       </li>
       <li>
         <a href="components-accordion.html">
-          <i class="bi bi-circle"></i><span>Accordion</span>
+          <i class="bi bi-circle"></i><span>Manage Orders</span>
         </a>
       </li>
       <li>
         <a href="components-badges.html">
-          <i class="bi bi-circle"></i><span>Badges</span>
+          <i class="bi bi-circle"></i><span>Delivery Schedules</span>
         </a>
       </li>
-      <li>
-        <a href="components-breadcrumbs.html">
-          <i class="bi bi-circle"></i><span>Breadcrumbs</span>
-        </a>
-      </li>
-      <li>
-        <a href="components-buttons.html">
-          <i class="bi bi-circle"></i><span>Buttons</span>
-        </a>
-      </li>
-      <li>
-        <a href="components-cards.html">
-          <i class="bi bi-circle"></i><span>Cards</span>
-        </a>
-      </li>
-      <li>
-        <a href="components-carousel.html">
-          <i class="bi bi-circle"></i><span>Carousel</span>
-        </a>
-      </li>
-      <li>
-        <a href="components-list-group.html">
-          <i class="bi bi-circle"></i><span>List group</span>
-        </a>
-      </li>
-      <li>
-        <a href="components-modal.html">
-          <i class="bi bi-circle"></i><span>Modal</span>
-        </a>
-      </li>
-      <li>
-        <a href="components-tabs.html">
-          <i class="bi bi-circle"></i><span>Tabs</span>
-        </a>
-      </li>
-      <li>
-        <a href="components-pagination.html">
-          <i class="bi bi-circle"></i><span>Pagination</span>
-        </a>
-      </li>
-      <li>
-        <a href="components-progress.html">
-          <i class="bi bi-circle"></i><span>Progress</span>
-        </a>
-      </li>
-      <li>
-        <a href="components-spinners.html">
-          <i class="bi bi-circle"></i><span>Spinners</span>
-        </a>
-      </li>
-      <li>
-        <a href="components-tooltips.html">
-          <i class="bi bi-circle"></i><span>Tooltips</span>
-        </a>
-      </li>
+
+
+
     </ul>
   </li><!-- End Components Nav -->
 
@@ -173,76 +127,62 @@
     <ul id="Customer-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
       <li>
         <a href="components-alerts.html">
-          <i class="bi bi-circle"></i><span>Alerts</span>
+          <i class="bi bi-circle"></i><span>View Customer Profiles</span>
         </a>
       </li>
       <li>
         <a href="components-accordion.html">
-          <i class="bi bi-circle"></i><span>Accordion</span>
+          <i class="bi bi-circle"></i><span>Service History</span>
         </a>
       </li>
       <li>
         <a href="components-badges.html">
-          <i class="bi bi-circle"></i><span>Badges</span>
+          <i class="bi bi-circle"></i><span>Send Reminders</span>
         </a>
       </li>
       <li>
         <a href="components-breadcrumbs.html">
-          <i class="bi bi-circle"></i><span>Breadcrumbs</span>
+          <i class="bi bi-circle"></i><span>Promotional Offers</span>
         </a>
       </li>
-      <li>
-        <a href="components-buttons.html">
-          <i class="bi bi-circle"></i><span>Buttons</span>
-        </a>
-      </li>
-      <li>
-        <a href="components-cards.html">
-          <i class="bi bi-circle"></i><span>Cards</span>
-        </a>
-      </li>
-      <li>
-        <a href="components-carousel.html">
-          <i class="bi bi-circle"></i><span>Carousel</span>
-        </a>
-      </li>
-      <li>
-        <a href="components-list-group.html">
-          <i class="bi bi-circle"></i><span>List group</span>
-        </a>
-      </li>
-      <li>
-        <a href="components-modal.html">
-          <i class="bi bi-circle"></i><span>Modal</span>
-        </a>
-      </li>
-      <li>
-        <a href="components-tabs.html">
-          <i class="bi bi-circle"></i><span>Tabs</span>
-        </a>
-      </li>
-      <li>
-        <a href="components-pagination.html">
-          <i class="bi bi-circle"></i><span>Pagination</span>
-        </a>
-      </li>
-      <li>
-        <a href="components-progress.html">
-          <i class="bi bi-circle"></i><span>Progress</span>
-        </a>
-      </li>
-      <li>
-        <a href="components-spinners.html">
-          <i class="bi bi-circle"></i><span>Spinners</span>
-        </a>
-      </li>
-      <li>
-        <a href="components-tooltips.html">
-          <i class="bi bi-circle"></i><span>Tooltips</span>
-        </a>
-      </li>
+
+
+
     </ul>
   </li><!-- End Components Nav -->
+
+
+  <li class="nav-item">
+    <a class="nav-link collapsed" data-bs-target="#Sales-nav" data-bs-toggle="collapse" href="#">
+      <i class="bi bi-coin"></i><span>Sales Management</span><i class="bi bi-chevron-down ms-auto"></i>
+    </a>
+    <ul id="Sales-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+      <li>
+        <a href="components-alerts.html">
+          <i class="bi bi-circle"></i><span>View Customer Profiles</span>
+        </a>
+      </li>
+      <li>
+        <a href="components-accordion.html">
+          <i class="bi bi-circle"></i><span>Service History</span>
+        </a>
+      </li>
+      <li>
+        <a href="components-badges.html">
+          <i class="bi bi-circle"></i><span>Send Reminders</span>
+        </a>
+      </li>
+      <li>
+        <a href="components-breadcrumbs.html">
+          <i class="bi bi-circle"></i><span>Promotional Offers</span>
+        </a>
+      </li>
+
+
+
+    </ul>
+  </li><!-- End Components Nav -->
+
 
   <li class="nav-item">
     <a class="nav-link collapsed" data-bs-target="#Reporting-nav" data-bs-toggle="collapse" href="#">
@@ -251,74 +191,30 @@
     <ul id="Reporting-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
       <li>
         <a href="components-alerts.html">
-          <i class="bi bi-circle"></i><span>Alerts</span>
+          <i class="bi bi-circle"></i><span>Service Reports</span>
         </a>
       </li>
       <li>
         <a href="components-accordion.html">
-          <i class="bi bi-circle"></i><span>Accordion</span>
+          <i class="bi bi-circle"></i><span>Inventory Reports</span>
         </a>
       </li>
       <li>
         <a href="components-badges.html">
-          <i class="bi bi-circle"></i><span>Badges</span>
+          <i class="bi bi-circle"></i><span>Sales Reports</span>
         </a>
       </li>
       <li>
         <a href="components-breadcrumbs.html">
-          <i class="bi bi-circle"></i><span>Breadcrumbs</span>
+          <i class="bi bi-circle"></i><span>Customer Feedback Reports</span>
         </a>
       </li>
       <li>
         <a href="components-buttons.html">
-          <i class="bi bi-circle"></i><span>Buttons</span>
+          <i class="bi bi-circle"></i><span>Export Reports</span>
         </a>
       </li>
-      <li>
-        <a href="components-cards.html">
-          <i class="bi bi-circle"></i><span>Cards</span>
-        </a>
-      </li>
-      <li>
-        <a href="components-carousel.html">
-          <i class="bi bi-circle"></i><span>Carousel</span>
-        </a>
-      </li>
-      <li>
-        <a href="components-list-group.html">
-          <i class="bi bi-circle"></i><span>List group</span>
-        </a>
-      </li>
-      <li>
-        <a href="components-modal.html">
-          <i class="bi bi-circle"></i><span>Modal</span>
-        </a>
-      </li>
-      <li>
-        <a href="components-tabs.html">
-          <i class="bi bi-circle"></i><span>Tabs</span>
-        </a>
-      </li>
-      <li>
-        <a href="components-pagination.html">
-          <i class="bi bi-circle"></i><span>Pagination</span>
-        </a>
-      </li>
-      <li>
-        <a href="components-progress.html">
-          <i class="bi bi-circle"></i><span>Progress</span>
-        </a>
-      </li>
-      <li>
-        <a href="components-spinners.html">
-          <i class="bi bi-circle"></i><span>Spinners</span>
-        </a>
-      </li>
-      <li>
-        <a href="components-tooltips.html">
-          <i class="bi bi-circle"></i><span>Tooltips</span>
-        </a>
-      </li>
+
     </ul>
   </li><!-- End Components Nav -->
 
@@ -329,74 +225,16 @@
     <ul id="User-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
       <li>
         <a href="components-alerts.html">
-          <i class="bi bi-circle"></i><span>Alerts</span>
+          <i class="bi bi-circle"></i><span>User Roles and Permissions</span>
         </a>
       </li>
       <li>
         <a href="components-accordion.html">
-          <i class="bi bi-circle"></i><span>Accordion</span>
+          <i class="bi bi-circle"></i><span>Activity Logs</span>
         </a>
       </li>
-      <li>
-        <a href="components-badges.html">
-          <i class="bi bi-circle"></i><span>Badges</span>
-        </a>
-      </li>
-      <li>
-        <a href="components-breadcrumbs.html">
-          <i class="bi bi-circle"></i><span>Breadcrumbs</span>
-        </a>
-      </li>
-      <li>
-        <a href="components-buttons.html">
-          <i class="bi bi-circle"></i><span>Buttons</span>
-        </a>
-      </li>
-      <li>
-        <a href="components-cards.html">
-          <i class="bi bi-circle"></i><span>Cards</span>
-        </a>
-      </li>
-      <li>
-        <a href="components-carousel.html">
-          <i class="bi bi-circle"></i><span>Carousel</span>
-        </a>
-      </li>
-      <li>
-        <a href="components-list-group.html">
-          <i class="bi bi-circle"></i><span>List group</span>
-        </a>
-      </li>
-      <li>
-        <a href="components-modal.html">
-          <i class="bi bi-circle"></i><span>Modal</span>
-        </a>
-      </li>
-      <li>
-        <a href="components-tabs.html">
-          <i class="bi bi-circle"></i><span>Tabs</span>
-        </a>
-      </li>
-      <li>
-        <a href="components-pagination.html">
-          <i class="bi bi-circle"></i><span>Pagination</span>
-        </a>
-      </li>
-      <li>
-        <a href="components-progress.html">
-          <i class="bi bi-circle"></i><span>Progress</span>
-        </a>
-      </li>
-      <li>
-        <a href="components-spinners.html">
-          <i class="bi bi-circle"></i><span>Spinners</span>
-        </a>
-      </li>
-      <li>
-        <a href="components-tooltips.html">
-          <i class="bi bi-circle"></i><span>Tooltips</span>
-        </a>
-      </li>
+
+
     </ul>
   </li><!-- End Components Nav -->
 

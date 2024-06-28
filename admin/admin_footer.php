@@ -22,6 +22,8 @@ SPECJ Motor Services <a href="#"> Inventory Management System</a>
 <!-- Template Main JS File -->
 <script src="../assets/js/main.js"></script>
 
+
+
 </body>
 
 </html>
