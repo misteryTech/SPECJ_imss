@@ -18,7 +18,7 @@
 
 
     <li>
-        <a href="services_details.php">
+        <a href="services_page.php">
           <i class="bi bi-circle"></i><span>List of Services</span>
         </a>
       </li>
@@ -67,7 +67,7 @@
       </li>
 
       <li>
-        <a href="components-tooltips.html">
+        <a href="view_stock_level.php">
           <i class="bi bi-circle"></i><span>View Stock Levels</span>
         </a>
       </li>
@@ -77,7 +77,7 @@
 
 
       <li>
-        <a href="components-tooltips.html">
+        <a href="parts_reorder_page.php">
           <i class="bi bi-circle"></i><span>Reorder Parts</span>
         </a>
       </li>
@@ -99,12 +99,12 @@
     </a>
     <ul id="Supplier-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
       <li>
-        <a href="components-alerts.html">
+        <a href="supplier_page.php">
           <i class="bi bi-circle"></i><span>Supplier Information</span>
         </a>
       </li>
       <li>
-        <a href="components-accordion.html">
+        <a href="supplier_manage_orders.php">
           <i class="bi bi-circle"></i><span>Manage Orders</span>
         </a>
       </li>
@@ -126,7 +126,7 @@
     </a>
     <ul id="Customer-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
       <li>
-        <a href="components-alerts.html">
+        <a href="customer_page.php">
           <i class="bi bi-circle"></i><span>View Customer Profiles</span>
         </a>
       </li>
