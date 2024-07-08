@@ -13,7 +13,7 @@
 
 
         // Prepare an SQL statement to insert data into the database
-        $stmt = $connection->prepare("INSERT INTO customers
+        $stmt = $connection->prepare("INSERT INTO customers_tbl
                 (c_firstname, c_lastname, email, phone, address)
                 VALUES (?, ?, ?, ?, ?)");
 

@@ -25,7 +25,7 @@
 
 
       <li>
-        <a href="components-tooltips.html">
+        <a href="schedule_services_page.php">
           <i class="bi bi-circle"></i><span>Schedule Service</span>
         </a>
       </li>
@@ -130,6 +130,14 @@
           <i class="bi bi-circle"></i><span>View Customer Profiles</span>
         </a>
       </li>
+
+      <li>
+        <a href="customer_vehicle_registration.php">
+          <i class="bi bi-circle"></i><span>Registered Vehicle</span>
+        </a>
+      </li>
+
+
       <li>
         <a href="components-accordion.html">
           <i class="bi bi-circle"></i><span>Service History</span>

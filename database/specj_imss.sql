@@ -11,11 +11,38 @@
  Target Server Version : 100428 (10.4.28-MariaDB)
  File Encoding         : 65001
 
- Date: 06/07/2024 16:29:47
+ Date: 08/07/2024 16:27:21
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for c_vehicles_registration_tbl
+-- ----------------------------
+DROP TABLE IF EXISTS `c_vehicles_registration_tbl`;
+CREATE TABLE `c_vehicles_registration_tbl`  (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `customer_id` int NULL DEFAULT NULL,
+  `vehicle_model` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `vehicle_year` int NOT NULL,
+  `license_plate` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `mileage` int NULL DEFAULT NULL,
+  `vin` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `registration_date` date NULL DEFAULT NULL,
+  `notes` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `customer_id`(`customer_id` ASC) USING BTREE,
+  CONSTRAINT `c_vehicles_registration_tbl_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customers_tbl` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of c_vehicles_registration_tbl
+-- ----------------------------
+INSERT INTO `c_vehicles_registration_tbl` VALUES (1, 3, 'Rusi', 2024, '1231-123123-1231', 122000, '1230ASDG123', '2024-07-08', 'NEW CUSTOMER');
+INSERT INTO `c_vehicles_registration_tbl` VALUES (2, 3, '123', 123, '123', 123123, 'asda', '2024-07-10', 'asd');
+INSERT INTO `c_vehicles_registration_tbl` VALUES (3, 4, '123', 123, '123', 123, '123', '2024-07-01', 'asd');
+INSERT INTO `c_vehicles_registration_tbl` VALUES (4, 1, 'asd', 123, '123', 123, 'asd', '2024-07-30', 'asd');
 
 -- ----------------------------
 -- Table structure for customers_tbl
@@ -30,12 +57,14 @@ CREATE TABLE `customers_tbl`  (
   `address` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `registrationDate` timestamp NOT NULL DEFAULT current_timestamp,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of customers_tbl
 -- ----------------------------
 INSERT INTO `customers_tbl` VALUES (1, 'asd', 'asd', 'reymarkescalante12@gmail.com', 'asd', 'asd', '2024-06-28 22:25:15');
+INSERT INTO `customers_tbl` VALUES (3, 'Reymark', 'EScalante', 'reymarkescalante@Gmail.com', '091248480202', 'asd', '2024-07-08 11:55:17');
+INSERT INTO `customers_tbl` VALUES (4, 'harley', 'silvestre', 'harly@gmail.com', '123123123', 'saasdad', '2024-07-08 13:37:50');
 
 -- ----------------------------
 -- Table structure for inventory_logs
