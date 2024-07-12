@@ -33,20 +33,20 @@
 
 
       <li>
-        <a href="components-tooltips.html">
-          <i class="bi bi-circle"></i><span>View Appointments</span>
+        <a href="services_calendar_schedule.php">
+          <i class="bi bi-circle"></i><span>View Calendar Schedule</span>
         </a>
       </li>
 
       <li>
-        <a href="components-tooltips.html">
+        <a href="manage_work_schedules.php">
           <i class="bi bi-circle"></i><span>Manage Work Orders</span>
         </a>
       </li>
 
       <li>
-        <a href="components-tooltips.html">
-          <i class="bi bi-circle"></i><span>Techinician Assignment</span>
+        <a href="mechanist_assign_services.php">
+          <i class="bi bi-circle"></i><span>Mechanist Assignment</span>
         </a>
       </li>
 
@@ -85,10 +85,19 @@
 
 
       <li>
-        <a href="components-tooltips.html">
+        <a href="incoming_shipments.php">
           <i class="bi bi-circle"></i><span>Incoming Shipments</span>
         </a>
       </li>
+
+
+      <li>
+        <a href="successful_delivered.php">
+          <i class="bi bi-circle"></i><span>Successfully Delivered</span>
+        </a>
+      </li>
+
+
     </ul>
   </li><!-- End Components Nav -->
 
@@ -109,7 +118,7 @@
         </a>
       </li>
       <li>
-        <a href="components-badges.html">
+        <a href="delivery_scheduled_list.php">
           <i class="bi bi-circle"></i><span>Delivery Schedules</span>
         </a>
       </li>
@@ -130,6 +139,7 @@
           <i class="bi bi-circle"></i><span>View Customer Profiles</span>
         </a>
       </li>
+
 
       <li>
         <a href="customer_vehicle_registration.php">
@@ -160,36 +170,6 @@
   </li><!-- End Components Nav -->
 
 
-  <li class="nav-item">
-    <a class="nav-link collapsed" data-bs-target="#Sales-nav" data-bs-toggle="collapse" href="#">
-      <i class="bi bi-coin"></i><span>Sales Management</span><i class="bi bi-chevron-down ms-auto"></i>
-    </a>
-    <ul id="Sales-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-      <li>
-        <a href="components-alerts.html">
-          <i class="bi bi-circle"></i><span>View Customer Profiles</span>
-        </a>
-      </li>
-      <li>
-        <a href="components-accordion.html">
-          <i class="bi bi-circle"></i><span>Service History</span>
-        </a>
-      </li>
-      <li>
-        <a href="components-badges.html">
-          <i class="bi bi-circle"></i><span>Send Reminders</span>
-        </a>
-      </li>
-      <li>
-        <a href="components-breadcrumbs.html">
-          <i class="bi bi-circle"></i><span>Promotional Offers</span>
-        </a>
-      </li>
-
-
-
-    </ul>
-  </li><!-- End Components Nav -->
 
 
   <li class="nav-item">
@@ -262,7 +242,7 @@
   </li><!-- End Profile Page Nav -->
 
   <li class="nav-item">
-    <a class="nav-link collapsed" href="users-profile.html">
+    <a class="nav-link collapsed" href="mechanist_page.php">
       <i class="bi bi-person"></i>
       <span>Mechanist</span>
     </a>

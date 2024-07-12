@@ -8,6 +8,19 @@
     <?php
         include("admin_topnav.php");
         include("admin_sidenav.php");
+
+        $sql = "SELECT id, supplierName, contactPerson, email, phone ,address, registrationDate FROM suppliers_tbl LIMIT 10";
+        $result = $connection->query($sql);
+
+        $supplier = [];
+        if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+                $suppliers[] = $row;
+            }
+        }
+
+
+
     ?>
 
     <!-- Main-->
@@ -30,9 +43,20 @@
                             <h5 class="card-title">Add Parts</h5>
 
                             <!-- Multi Columns Form -->
-                            <form class="row g-3" action="process_code/parts_registration.php" method="POST">
-
+                            <form class="row g-3" action="process_code/parts_registration.php" method="POST" enctype="multipart/form-data">
                                 <div class="col-md-4">
+                                <img id="image_preview" src="" alt="Image Preview" style="max-width: 100%; margin-bottom: 15px;">
+                                    <label for="parts_image" class="form-label">Product Picture</label>
+                                    <input type="file" class="form-control" id="parts_image" name="parts_image" onchange="previewImage(event)">
+
+                                </div>
+
+                                <div class="col-md-12">
+                                    <label for="parts_name" class="form-label">Parts Name</label>
+                                    <input type="text" class="form-control" id="parts_name" name="parts_name">
+                                </div>
+
+                                <div class="col-md-6">
                                     <label for="services_type" class="form-label">Services Type</label>
                                     <select name="services_type" id="services_type" class="form-select">
                                         <option selected>Select Type Of Vehicle</option>
@@ -41,12 +65,7 @@
                                     </select>
                                 </div>
 
-                                <div class="col-md-4">
-                                    <label for="parts_name" class="form-label">Parts Name</label>
-                                    <input type="text" class="form-control" id="parts_name" name="parts_name">
-                                </div>
-
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <label for="parts_number" class="form-label">Parts Number</label>
                                     <input type="text" class="form-control" id="parts_number" name="parts_number">
                                 </div>
@@ -73,9 +92,10 @@
                                 </div>
 
                                 <div class="col-md-4">
-                                    <label for="manufacturer" class="form-label">Manufacturer</label>
+                                    <label for="manufacturer" class="form-label">Brand</label>
                                     <select class="form-control" id="manufacturer" name="manufacturer">
-                                        <option value="">Select a manufacturer</option>
+                                        <option value="">Select a Brand</option>
+                                        <option value="Rusi">Rusi</option>
                                         <option value="bosch">Bosch</option>
                                         <option value="brembo">Brembo</option>
                                         <option value="did">DID</option>
@@ -109,10 +129,18 @@
                                     <input type="number" class="form-control" id="quantity_stock" name="quantity_stock">
                                 </div>
 
-                                <div class="col-md-4">
-                                    <label for="supplier" class="form-label">Supplier</label>
-                                    <input type="text" class="form-control" id="supplier" name="supplier">
+                                    <div class="col-md-4">
+                                    <label for="customer_name" class="form-label">Supplier</label>
+                                    <select name="supplier" id="supplier" class="form-select" onchange="updateCustomerInfo()">
+                                        <option value="" selected>Select Customer</option>
+                                        <?php foreach ($suppliers as $supplier) : ?>
+                                            <option value="<?php echo htmlspecialchars($supplier['id']); ?>">
+                                                <?php echo htmlspecialchars($supplier['supplierName']); ?>
+                                            </option>
+                                        <?php endforeach; ?>
+                                    </select>
                                 </div>
+
 
                                 <div class="col-md-4">
                                     <label for="condition" class="form-label">Condition</label>
@@ -126,7 +154,7 @@
 
                                 <div class="text-center">
                                     <button type="submit" class="btn btn-primary">Submit</button>
-                                    <button type="reset" class="btn btn-secondary">Reset</button>
+                                    <button type="reset" class="btn btn-secondary" onclick="resetImagePreview()">Reset</button>
                                 </div>
                             </form><!-- End Multi Columns Form -->
                         </div>
@@ -146,15 +174,20 @@
                                         <th scope="col">Price</th>
                                         <th scope="col">Stock</th>
                                         <th scope="col">Supplier</th>
+                                        <th scope="col">Brand</th>
                                         <th scope="col">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
-                                        $stmt = $connection->prepare("SELECT * FROM motorparts_tbl");
-                                        $stmt->execute();
-                                        $result = $stmt->get_result();
-                                        $count = 1;
+                                   $stmt = $connection->prepare("
+                                   SELECT mp.*, s.supplierName, mp.parts_name, mp.parts_number, mp.price, mp.QuantityInStock, mp.manufacturer
+                                   FROM motorparts_tbl mp
+                                      INNER JOIN suppliers_tbl s ON mp.supplier = s.id
+                                       ");
+                                    $stmt->execute();
+                                    $result = $stmt->get_result();
+                                    $count = 1;
 
                                         while($row = $result->fetch_assoc()) {
                                             echo "<tr>";
@@ -163,7 +196,9 @@
                                             echo "<td>".$row['parts_number']."</td>";
                                             echo "<td>".$row['price']."</td>";
                                             echo "<td>".$row['QuantityInStock']."</td>";
-                                            echo "<td>".$row['supplier']."</td>";
+
+                                            echo "<td>".$row['supplierName']."</td>";
+                                            echo "<td>".$row['manufacturer']."</td>";
                                             echo "<td>";
                                             echo "<button class='btn btn-primary' data-toggle='modal' data-target='#editModal" . $row['m_id'] . "'>Edit</button> ";
                                             echo "<button class='btn btn-danger' data-toggle='modal' data-target='#deleteModal" . $row['m_id'] . "'>Delete</button>";
@@ -171,92 +206,114 @@
                                             echo "</tr>";
 
                                             $count++;
-                                            // Edit Modal
-                                            echo "<div class='modal fade' id='editModal" . $row['m_id'] . "' tabindex='-1' role='dialog' aria-labelledby='editModalLabel" . $row['m_id'] . "' aria-hidden='true'>";
-                                            echo "<div class='modal-dialog'>";
-                                            echo "<div class='modal-content'>";
-                                            echo "<div class='modal-header'>";
-                                            echo "<h5 class='modal-title' id='editModalLabel" . $row['m_id'] . "'>Edit Service</h5>";
-                                            echo "<button type='button' class='btn-close' data-dismiss='modal' aria-label='Close'></button>";
-                                            echo "</div>";
-                                            echo "<div class='modal-body'>";
-                                            echo "<form action='process_code/parts_edit_information.php' method='POST'>";
-                                            echo "<input type='hidden' name='parts_id' value='" . $row['m_id'] . "'>";
+                                                      // Edit Modal
+                                                      echo "<div class='modal fade' id='editModal" . $row['m_id'] . "' tabindex='-1' role='dialog' aria-labelledby='editModalLabel" . $row['m_id'] . "' aria-hidden='true'>";
+                                                      echo "<div class='modal-dialog'>";
+                                                      echo "<div class='modal-content'>";
+                                                      echo "<div class='modal-header'>";
+                                                      echo "<h5 class='modal-title' id='editModalLabel" . $row['m_id'] . "'>Edit Service</h5>";
+                                                      echo "<button type='button' class='btn-close' data-dismiss='modal' aria-label='Close'></button>";
+                                                      echo "</div>";
+                                                      echo "<div class='modal-body'>";
+                                                      echo "<form action='process_code/parts_edit_information.php' method='POST'  enctype='multipart/form-data'>";
+                                                      echo "<input type='hidden' name='m_id' value='" . $row['m_id'] . "'>";
+
+
 
                                             echo "<div class='form-group'>";
-                                            echo "<label for='edit_parts_name" . $row['m_id'] . "'>Parts Name</label>";
-                                            echo "<input type='text' class='form-control' id='edit_parts_name" . $row['m_id'] . "' name='parts_name' value='" . $row['parts_name'] . "' required>";
+                                            echo "<label for='current_image' class='col-form-label'>Current Image:</label><br>";
+                                            echo "<img src='process_code/" . $row['image_path'] . "' alt='Current Image' style='max-width: 250px; max-height: 250px;'>";
                                             echo "</div>";
 
+                                            // Add an input field for uploading a new image
                                             echo "<div class='form-group'>";
-                                            echo "<label for='edit_parts_number" . $row['m_id'] . "'>Parts Number</label>";
-                                            echo "<input type='text' class='form-control' id='edit_parts_number" . $row['m_id'] . "' name='parts_number' value='" . $row['parts_number'] . "' required>";
+                                            echo "<label for='new_image' class='col-form-label'>Upload New Image:</label>";
+                                            echo "<input type='file' class='form-control-file' id='new_image' name='new_image'>";
+                                            echo "<small class='form-text text-muted'>Upload a new image if you want to replace the current one.</small>";
                                             echo "</div>";
 
-                                            echo "<div class='form-group'>";
-                                            echo "<label for='edit_category" . $row['m_id'] . "'>Category</label>";
-                                            echo "<input type='text' class='form-control' id='edit_category" . $row['m_id'] . "' name='category' value='" . $row['category'] . "' required>";
-                                            echo "</div>";
 
-                                            echo "<div class='form-group'>";
-                                            echo "<label for='edit_manufacturer" . $row['m_id'] . "'>Manufacturer</label>";
-                                            echo "<input type='text' class='form-control' id='edit_manufacturer" . $row['m_id'] . "' name='manufacturer' value='" . $row['manufacturer'] . "' required>";
-                                            echo "</div>";
 
-                                            echo "<div class='form-group'>";
-                                            echo "<label for='edit_price" . $row['m_id'] . "'>Price</label>";
-                                            echo "<input type='text' class='form-control' id='edit_price" . $row['m_id'] . "' name='price' value='" . $row['price'] . "' required>";
-                                            echo "</div>";
+                                                      echo "<div class='form-group'>";
+                                                      echo "<label for='edit_parts_name" . $row['m_id'] . "'>Parts Name</label>";
+                                                      echo "<input type='text' class='form-control' id='edit_parts_name" . $row['m_id'] . "' name='edit_parts_name' value='" . $row['parts_name'] . "' required>";
+                                                      echo "</div>";
 
-                                            echo "<div class='form-group'>";
-                                            echo "<label for='edit_quantity_stock" . $row['m_id'] . "'>Stock</label>";
-                                            echo "<input type='text' class='form-control' id='edit_quantity_stock" . $row['m_id'] . "' name='quantity_stock' value='" . $row['QuantityInStock'] . "' required>";
-                                            echo "</div>";
+                                                      echo "<div class='form-group'>";
+                                                      echo "<label for='edit_parts_number" . $row['m_id'] . "'>Parts Number</label>";
+                                                      echo "<input type='text' class='form-control' id='edit_parts_number" . $row['m_id'] . "' name='edit_parts_number' value='" . $row['parts_number'] . "' required>";
+                                                      echo "</div>";
 
-                                            echo "<div class='form-group'>";
-                                            echo "<label for='edit_supplier" . $row['m_id'] . "'>Supplier</label>";
-                                            echo "<input type='text' class='form-control' id='edit_supplier" . $row['m_id'] . "' name='supplier' value='" . $row['supplier'] . "' required>";
-                                            echo "</div>";
+                                                      echo "<div class='form-group'>";
+                                                      echo "<label for='edit_category" . $row['m_id'] . "'>Category</label>";
+                                                      echo "<input type='text' class='form-control' id='edit_category" . $row['m_id'] . "' name='edit_category' value='" . $row['category'] . "' required>";
+                                                      echo "</div>";
 
-                                            echo "<div class='form-group'>";
-                                            echo "<label for='edit_condition" . $row['m_id'] . "'>Condition</label>";
-                                            echo "<input type='text' class='form-control' id='edit_condition" . $row['m_id'] . "' name='condition' value='" . $row['condition'] . "' required>";
-                                            echo "</div>";
+                                                      echo "<div class='form-group'>";
+                                                      echo "<label for='edit_manufacturer" . $row['m_id'] . "'>Manufacturer</label>";
+                                                      echo "<input type='text' class='form-control' id='edit_manufacturer" . $row['m_id'] . "' name='edit_manufacturer' value='" . $row['manufacturer'] . "' required>";
+                                                      echo "</div>";
 
-                                            echo "<div class='form-group'>";
-                                            echo "<label for='edit_services_type" . $row['m_id'] . "'>Service Type</label>";
-                                            echo "<select class='form-control' id='edit_services_type" . $row['m_id'] . "' name='services_type' required>";
-                                            echo "<option value='Car'" . ($row['services_type'] == 'Car' ? ' selected' : '') . ">Car</option>";
-                                            echo "<option value='Motorcycle'" . ($row['services_type'] == 'Motorcycle' ? ' selected' : '') . ">Motorcycle</option>";
-                                            echo "</select>";
-                                            echo "</div>";
+                                                      echo "<div class='form-group'>";
+                                                      echo "<label for='edit_price" . $row['m_id'] . "'>Price</label>";
+                                                      echo "<input type='text' class='form-control' id='edit_price" . $row['m_id'] . "' name='edit_price' value='" . $row['price'] . "' required>";
+                                                      echo "</div>";
 
-                                            echo "</div>";
-                                            echo "<div class='modal-footer'>";
-                                            echo "<button type='submit' class='btn btn-primary'>Save Changes</button>";
-                                            echo "<button type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button>";
-                                            echo "</form>";
-                                            echo "</div>";
-                                            echo "</div>";
-                                            echo "</div>";
-                                            echo "</div>";
+                                                      echo "<div class='form-group'>";
+                                                      echo "<label for='edit_quantity_stock" . $row['m_id'] . "'>Stock</label>";
+                                                      echo "<input type='text' class='form-control' id='edit_quantity_stock" . $row['m_id'] . "' name='edit_quantity_stock' value='" . $row['QuantityInStock'] . "' required>";
+                                                      echo "</div>";
+
+                                                      echo "<div class='form-group'>";
+                                                      echo "<label for='edit_supplier" . $row['m_id'] . "'>Supplier</label>";
+                                                      echo "<input type='text' class='form-control' id='edit_supplier" . $row['m_id'] . "' name='edit_supplier' value='" . $row['supplier'] . "' required>";
+                                                      echo "</div>";
+
+
+                                                      echo "<div class='form-group'>";
+                                                      echo "<label for='edit_condition" . $row['m_id'] . "'>Condition</label>";
+                                                      echo "<select class='form-control' id='edit_condition" . $row['m_id'] . "' name='edit_condition' required>";
+                                                      echo "<option value='New'" . ($row['status'] == 'New' ? ' selected' : '') . ">New</option>";
+                                                      echo "<option value='Generic'" . ($row['status'] == 'Generic' ? ' selected' : '') . ">Generic</option>";
+                                                      echo "<option value='Replacement'" . ($row['status'] == 'Replacement' ? ' selected' : '') . ">Replacement</option>";
+                                                      echo "</select>";
+                                                      echo "</div>";
+
+
+
+                                                      echo "<div class='form-group'>";
+                                                      echo "<label for='edit_services_type" . $row['m_id'] . "'>Service Type</label>";
+                                                      echo "<select class='form-control' id='edit_services_type" . $row['m_id'] . "' name='edit_services_type' required>";
+                                                      echo "<option value='Car'" . ($row['services_type'] == 'Car' ? ' selected' : '') . ">Car</option>";
+                                                      echo "<option value='Motorcycle'" . ($row['services_type'] == 'Motorcycle' ? ' selected' : '') . ">Motorcycle</option>";
+                                                      echo "</select>";
+                                                      echo "</div>";
+
+                                                      echo "</div>";
+                                                      echo "<div class='modal-footer'>";
+                                                      echo "<button type='submit' class='btn btn-primary'>Save Changes</button>";
+                                                      echo "<button type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button>";
+                                                      echo "</form>";
+                                                      echo "</div>";
+                                                      echo "</div>";
+                                                      echo "</div>";
+                                                      echo "</div>";
+
 
                                             // Delete Modal
                                             echo "<div class='modal fade' id='deleteModal" . $row['m_id'] . "' tabindex='-1' role='dialog' aria-labelledby='deleteModalLabel" . $row['m_id'] . "' aria-hidden='true'>";
-                                            echo "<div class='modal-dialog' role='document'>";
+                                            echo "<div class='modal-dialog'>";
                                             echo "<div class='modal-content'>";
                                             echo "<div class='modal-header'>";
                                             echo "<h5 class='modal-title' id='deleteModalLabel" . $row['m_id'] . "'>Delete Service</h5>";
+                                            echo "<button type='button' class='btn-close' data-dismiss='modal' aria-label='Close'></button>";
                                             echo "</div>";
                                             echo "<div class='modal-body'>";
                                             echo "<p>Are you sure you want to delete this service?</p>";
                                             echo "</div>";
                                             echo "<div class='modal-footer'>";
-                                            echo "<form action='process_code/parts_delete.php' method='POST' style='display:inline;'>";
-                                            echo "<input type='hidden' name='parts_id' value='" . $row['m_id'] . "'>";
-                                            echo "<button type='submit' class='btn btn-danger'>Delete</button>";
-                                            echo "<button type='button' class='btn btn-secondary' data-dismiss='modal'>Cancel</button>";
-                                            echo "</form>";
+                                            echo "<button type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button>";
+                                            echo "<a href='process_code/delete_parts.php?m_id=" . $row['m_id'] . "' class='btn btn-danger'>Delete</a>";
                                             echo "</div>";
                                             echo "</div>";
                                             echo "</div>";
@@ -264,12 +321,14 @@
                                         }
                                     ?>
                                 </tbody>
-                            </table><!-- End Table with hoverable rows -->
+                            </table>
                         </div>
                     </div>
                 </div>
+
             </div>
         </section>
+
     </main><!-- End #main -->
 
     <!-- ======= Footer ======= -->
@@ -277,12 +336,22 @@
         include("admin_footer.php");
     ?>
 
-    <!-- Include jQuery and DataTables CSS/JS -->
+    <!-- JavaScript to Preview Image -->
     <script>
-        $(document).ready(function() {
-            $('#parts_datatable').DataTable();
-        });
+        function previewImage(event) {
+            var reader = new FileReader();
+            reader.onload = function(){
+                var output = document.getElementById('image_preview');
+                output.src = reader.result;
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        }
+
+        function resetImagePreview() {
+            document.getElementById('image_preview').src = "";
+        }
     </script>
 
 </body>
+
 </html>

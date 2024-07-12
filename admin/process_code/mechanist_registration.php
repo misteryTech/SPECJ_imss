@@ -13,8 +13,8 @@
 
 
         // Prepare an SQL statement to insert data into the database
-        $stmt = $connection->prepare("INSERT INTO customers_tbl
-                (c_firstname, c_lastname, email, phone, address)
+        $stmt = $connection->prepare("INSERT INTO mechanist_tbl
+                (m_firstname, m_lastname, email, phone, address)
                 VALUES (?, ?, ?, ?, ?)");
 
         // Bind parameters to the prepared statement
@@ -22,10 +22,10 @@
 
         // Execute the prepared statement
         if($stmt->execute()){
-            echo "<script>alert('Customer successfully registered');</script>";
-            echo "<script>window.location.href = '../customer_page.php';</script>";
+            echo "<script>alert('customer successfully registered');</script>";
+            echo "<script>window.location.href = '../mechanist_page.php';</script>";
         } else {
-            echo "<script>alert('Failed to register customer');</script>";
+            echo "<script>alert('Failed to register mechanist');</script>";
         }
 
         // Close the prepared statement and database connection

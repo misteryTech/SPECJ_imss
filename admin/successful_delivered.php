@@ -12,10 +12,10 @@
     <!-- Main -->
     <main id="main" class="main">
         <div class="pagetitle">
-            <h1>Supplier Management</h1>
+            <h1>Inventory Management</h1>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item active">Manage Orders</li>
+                    <li class="breadcrumb-item active">Incoming Shipments</li>
                 </ol>
             </nav>
         </div><!-- End Page Title -->
@@ -25,7 +25,7 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">List of Order Request</h5>
+                            <h5 class="card-title">List of Incoming Request</h5>
                             <div class="table-responsive">
                                 <table class="table table-hover" id="services_manage_order_datatable">
                                     <thead>
@@ -43,7 +43,7 @@
                                     </thead>
                                     <tbody>
                                         <?php
-                                            $stmt = $connection->prepare("SELECT * FROM reorders_tbl");
+                                            $stmt = $connection->prepare("SELECT * FROM reorders_tbl WHERE status='Received'");
                                             $stmt->execute();
                                             $result = $stmt->get_result();
                                             $count = 1;
@@ -58,20 +58,18 @@
                                                 echo "<td>" . $row['supplier_id'] . "</td>";
 
                                                 echo "<td>";
-                                                if ($row['status'] == 'Rejected') {
-                                                    echo "<h5><span class='badge rounded-pill bg-danger'>" . $row['status'] . "</span></h5>";
-                                                } else if ($row['status'] == 'Delivered'){
-                                                    echo "<h5><span class='badge rounded-pill bg-secondary'>" . $row['status'] . "</span></h5>";
-                                                } else {
+                                                if ($row['status'] == 'Received') {
                                                     echo "<h5><span class='badge rounded-pill bg-success'>" . $row['status'] . "</span></h5>";
+
+                                                } else {
+                                                    echo "<h5><span class='badge rounded-pill bg-dark'>" . $row['status'] . "</span></h5>";
                                                 }
                                                 echo "</td>";
 
                                                 echo "<td>
                                                     <div class='d-flex'>
                                                         <a data-toggle='modal' data-target='#reorderModal" . $row['reorder_id'] . "' class='btn btn-primary btn-md'>View</a>
-                                                        <span class='mx-1'></span>
-                                                        <a data-toggle='modal' data-target='#rejectModal" . $row['reorder_id'] . "' class='btn btn-danger btn-md'>Reject</a>
+
                                                         <span class='mx-1'></span>
                                                         <a data-toggle='modal' data-target='#trackModal" . $row['reorder_id'] . "' class='btn btn-warning btn-md'>Track</a>
                                                     </div>
@@ -89,7 +87,7 @@
                                                 echo "</div>";
                                                 echo "<div class='modal-body'>";
 
-                                                echo "<form action='process_code/supplier_manage_order.php' method='POST'>";
+                                                echo "<form action='process_code/update_incoming_shipment.php' method='POST'>";
                                                 echo "<input type='hidden' name='reorder_id' value='" . $row['reorder_id'] . "'>";
 
                                                 echo "<div class='form-group'>";
@@ -127,14 +125,10 @@
                                                 echo "<input type='date' class='form-control' id='expected_delivery_date" . $row['reorder_id'] . "' name='expected_delivery_date' value='" . $row['expected_delivery_date'] . "' required>";
                                                 echo "</div>";
 
-                                                echo "<div class='form-group'>";
-                                                echo "<label for='status" . $row['reorder_id'] . "'>Request Status</label>";
-                                                echo "<input type='text' class='form-control' id='status" . $row['reorder_id'] . "' name='status' value='" . $row['status'] . "' required>";
-                                                echo "</div>";
 
                                                 echo "</div>";
                                                 echo "<div class='modal-footer'>";
-                                                echo "<button type='submit' class='btn btn-success btn-md'>Approve</button>";
+                                                echo "<button type='submit' class='btn btn-success btn-md'>Received</button>";
                                                 echo "<button type='button' class='btn btn-danger' data-dismiss='modal'>Close</button>";
                                                 echo "</form>";
                                                 echo "</div>";
@@ -142,47 +136,6 @@
                                                 echo "</div>";
                                                 echo "</div>";
 
-                                                // Reject Modal
-                                                echo "<div class='modal fade' id='rejectModal" . $row['reorder_id'] . "' tabindex='-1' role='dialog' aria-labelledby='rejectModalLabel" . $row['reorder_id'] . "' aria-hidden='true'>";
-                                                echo "<div class='modal-dialog'>";
-                                                echo "<div class='modal-content'>";
-                                                echo "<div class='modal-header'>";
-                                                echo "<h5 class='modal-title' id='rejectModalLabel" . $row['reorder_id'] . "'>Reject Order</h5>";
-                                                echo "<button type='button' class='btn-close' data-dismiss='modal' aria-label='Close'></button>";
-                                                echo "</div>";
-                                                echo "<div class='modal-body'>";
-                                                echo "<form action='process_code/supplier_reject_orders.php' method='POST'>";
-                                                echo "<input type='hidden' name='reorder_id' value='" . $row['reorder_id'] . "'>";
-
-                                                echo "<input type='text' class='form-control' id='reorder_parts_name" . $row['reorder_id'] . "' name='parts_id' value='" . $row['parts_id'] . "' hidden>";
-                                                echo "<input type='text' class='form-control' id='reorder_parts_number" . $row['reorder_id'] . "' name='parts_number' value='" . $row['parts_id'] . "' hidden>";
-                                                echo "<input type='number' class='form-control' id='reorder_quantity" . $row['quantity_to_reorder'] . "' name='quantity_to_reorder' min='1' value='" . $row['quantity_to_reorder'] . "' hidden>";
-                                                echo "<input type='text' class='form-control' id='reorder_price" . $row['reorder_id'] . "' name='price' value='" . $row['price'] . "' hidden>";
-                                                echo "<input type='text' class='form-control' id='reorder_supplier" . $row['reorder_id'] . "' name='supplier_id' value='" . $row['supplier_id'] . "' hidden>";
-                                                echo "<input type='date' class='form-control' id='expected_delivery_date" . $row['reorder_id'] . "' name='expected_delivery_date' value='" . $row['expected_delivery_date'] . "' hidden>";
-                                                echo "<input type='date' class='form-control' id='reorder_date" . $row['reorder_id'] . "' name='reorder_date' value='" . $row['reorder_date'] . "' hidden>";
-
-                                                echo "<div class='form-group'>";
-                                                echo "<label for='reject_reason" . $row['reorder_id'] . "'>Order Request ID:  </label>";
-                                                echo "<h5>" . $row['reorder_id'] . "</h5>";
-                                                echo "</div>";
-
-
-
-                                                echo "<div class='form-group'>";
-                                                echo "<label for='reject_reason" . $row['reorder_id'] . "'>Reason for Rejection</label>";
-                                                echo "<textarea class='form-control' id='reject_reason" . $row['reorder_id'] . "' name='reject_reason' rows='4' required></textarea>";
-                                                echo "</div>";
-
-                                                echo "</div>";
-                                                echo "<div class='modal-footer'>";
-                                                echo "<button type='submit' class='btn btn-danger btn-md'>Reject</button>";
-                                                echo "<button type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button>";
-                                                echo "</form>";
-                                                echo "</div>";
-                                                echo "</div>";
-                                                echo "</div>";
-                                                echo "</div>";
 
                                                 // Track Modal
                                                 echo "<div class='modal fade' id='trackModal" . $row['reorder_id'] . "' tabindex='-1' role='dialog' aria-labelledby='trackModalLabel" . $row['reorder_id'] . "' aria-hidden='true'>";

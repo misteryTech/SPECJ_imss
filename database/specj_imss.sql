@@ -11,7 +11,7 @@
  Target Server Version : 100428 (10.4.28-MariaDB)
  File Encoding         : 65001
 
- Date: 08/07/2024 16:27:21
+ Date: 12/07/2024 17:04:17
 */
 
 SET NAMES utf8mb4;
@@ -34,15 +34,13 @@ CREATE TABLE `c_vehicles_registration_tbl`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `customer_id`(`customer_id` ASC) USING BTREE,
   CONSTRAINT `c_vehicles_registration_tbl_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customers_tbl` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of c_vehicles_registration_tbl
 -- ----------------------------
-INSERT INTO `c_vehicles_registration_tbl` VALUES (1, 3, 'Rusi', 2024, '1231-123123-1231', 122000, '1230ASDG123', '2024-07-08', 'NEW CUSTOMER');
-INSERT INTO `c_vehicles_registration_tbl` VALUES (2, 3, '123', 123, '123', 123123, 'asda', '2024-07-10', 'asd');
-INSERT INTO `c_vehicles_registration_tbl` VALUES (3, 4, '123', 123, '123', 123, '123', '2024-07-01', 'asd');
-INSERT INTO `c_vehicles_registration_tbl` VALUES (4, 1, 'asd', 123, '123', 123, 'asd', '2024-07-30', 'asd');
+INSERT INTO `c_vehicles_registration_tbl` VALUES (6, 4, 'Haojues', 2222, 'MVP102305', 111111111, 'ASD', '2024-07-11', 'ASD');
+INSERT INTO `c_vehicles_registration_tbl` VALUES (8, 5, 'Rusi', 2023, '222mwp', 22, '1230ASDG123', '2024-07-11', 'asd');
 
 -- ----------------------------
 -- Table structure for customers_tbl
@@ -57,14 +55,13 @@ CREATE TABLE `customers_tbl`  (
   `address` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `registrationDate` timestamp NOT NULL DEFAULT current_timestamp,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of customers_tbl
 -- ----------------------------
-INSERT INTO `customers_tbl` VALUES (1, 'asd', 'asd', 'reymarkescalante12@gmail.com', 'asd', 'asd', '2024-06-28 22:25:15');
-INSERT INTO `customers_tbl` VALUES (3, 'Reymark', 'EScalante', 'reymarkescalante@Gmail.com', '091248480202', 'asd', '2024-07-08 11:55:17');
-INSERT INTO `customers_tbl` VALUES (4, 'harley', 'silvestre', 'harly@gmail.com', '123123123', 'saasdad', '2024-07-08 13:37:50');
+INSERT INTO `customers_tbl` VALUES (4, 'Reymark', 'Escalante', 'reymarkescalante12@gmail.com', '1231231', 'reymark@gmail.com', '2024-07-10 00:55:34');
+INSERT INTO `customers_tbl` VALUES (5, 'Starbrigh', 'Gensan', 'admin@gmail.com', '09399213074', 'Pres Quirino Ave', '2024-07-11 15:28:41');
 
 -- ----------------------------
 -- Table structure for inventory_logs
@@ -79,7 +76,7 @@ CREATE TABLE `inventory_logs`  (
   `status` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `quantity_change` int NOT NULL,
   PRIMARY KEY (`log_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 23 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of inventory_logs
@@ -99,6 +96,34 @@ INSERT INTO `inventory_logs` VALUES (12, 6, 'Approve Request', 'the rats', '2024
 INSERT INTO `inventory_logs` VALUES (13, 7, 'g', 'the rats', '2024-07-06 09:39:07', 'Rejected', 1);
 INSERT INTO `inventory_logs` VALUES (14, 7, 'Approve Request', 'the rats', '2024-07-06 09:39:23', 'Delivered', 1);
 INSERT INTO `inventory_logs` VALUES (15, 4, 'Approve Request', '', '2024-07-06 09:44:26', 'Delivered', 1230);
+INSERT INTO `inventory_logs` VALUES (16, 5, 'asd', '', '2024-07-06 15:28:54', 'Rejected', 123123);
+INSERT INTO `inventory_logs` VALUES (17, 7, 'Approve Request', 'the rats', '2024-07-07 19:25:59', 'Received', 1);
+INSERT INTO `inventory_logs` VALUES (18, 4, 'Approve Request', '', '2024-07-07 19:26:24', 'Received', 1230);
+INSERT INTO `inventory_logs` VALUES (19, 1, 'Approve Request', 'the rats', '2024-07-10 15:28:38', 'Delivered', 10);
+INSERT INTO `inventory_logs` VALUES (20, 1, 'Approve Request', 'the rats', '2024-07-10 15:29:37', 'Received', 10);
+INSERT INTO `inventory_logs` VALUES (21, 2, 'Approve Request', 'the rats', '2024-07-10 15:32:09', 'Delivered', 20);
+INSERT INTO `inventory_logs` VALUES (22, 3, 'Tamad MAgbenta', 'the rats', '2024-07-10 15:34:57', 'Rejected', 200);
+
+-- ----------------------------
+-- Table structure for mechanist_tbl
+-- ----------------------------
+DROP TABLE IF EXISTS `mechanist_tbl`;
+CREATE TABLE `mechanist_tbl`  (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `m_firstname` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `m_lastname` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `email` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `phone` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `address` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `registrationDate` timestamp NOT NULL DEFAULT current_timestamp,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of mechanist_tbl
+-- ----------------------------
+INSERT INTO `mechanist_tbl` VALUES (1, 'Rusi', 'asd', 'reymarkescalante12@gmail.com', 'asd', 'asd', '2024-06-28 22:25:15');
+INSERT INTO `mechanist_tbl` VALUES (3, 'Toyota', 'asd', 'reymarkescalante12@gmail.com', '123', 'asd', '2024-07-08 02:18:30');
 
 -- ----------------------------
 -- Table structure for motorparts_tbl
@@ -114,17 +139,22 @@ CREATE TABLE `motorparts_tbl`  (
   `QuantityInStock` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `supplier` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `date_added` datetime NULL DEFAULT current_timestamp ON UPDATE CURRENT_TIMESTAMP,
-  `condition` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `status` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `services_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `image_path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`m_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of motorparts_tbl
 -- ----------------------------
-INSERT INTO `motorparts_tbl` VALUES (1, 'asd', 'asd1231', 'sad', 'asd', 12312.00, '123', 'asd', NULL, 'asd', 'Car');
-INSERT INTO `motorparts_tbl` VALUES (2, 'Spark Plug', 'asd123', 'asd', 'asd', 123.00, '123', 'asd', NULL, 'asd', 'Motorcycle');
-INSERT INTO `motorparts_tbl` VALUES (3, 'Battery', 'asd123', 'Body Parts', 'SEcret', 145.00, '5', 'the rats', '2024-06-28 20:55:14', 'new', 'Motorcycle');
+INSERT INTO `motorparts_tbl` VALUES (2, 'Spark Plug', 'asd123', 'asd', 'asd', 123.00, '1', 'asd', '2024-07-12 14:57:46', '0', 'Car', NULL);
+INSERT INTO `motorparts_tbl` VALUES (3, 'Battery', 'asd123', 'Body Parts', 'SEcret', 145.00, '5', 'the rats', '2024-06-28 20:55:14', 'new', 'Motorcycle', NULL);
+INSERT INTO `motorparts_tbl` VALUES (9, 'Cowling', '154-123', 'accessories', 'Rusi', 750.00, '50', 'rusi', '2024-07-10 21:11:42', 'New', 'Motorcycle', NULL);
+INSERT INTO `motorparts_tbl` VALUES (10, 'headlight', '154-987', 'accessories', 'Rusi', 600.00, '100', 'rusi', '2024-07-11 09:50:53', '0', 'Motorcycle', NULL);
+INSERT INTO `motorparts_tbl` VALUES (12, '123', '1231', 'accessories', 'shinko', 123.00, '123123', '1asdasd', '2024-07-11 09:54:05', 'Replacement', 'Motorcycle', NULL);
+INSERT INTO `motorparts_tbl` VALUES (13, 'last', 'last', 'maintenance-tools', 'kn', 123.00, '123', 'last', '2024-07-11 11:25:21', 'Generic', 'Motorcycle', 'uploads/hospital2.png');
+INSERT INTO `motorparts_tbl` VALUES (14, 'asdasd', '123', 'asdasd', 'asdasd', 123123.00, '12312', '2', '2024-07-11 16:55:01', 'New', 'Car', 'uploads/photo_2024-05-20_07-17-54.jpg');
 
 -- ----------------------------
 -- Table structure for reorders_tbl
@@ -142,18 +172,41 @@ CREATE TABLE `reorders_tbl`  (
   PRIMARY KEY (`reorder_id`) USING BTREE,
   INDEX `parts_id`(`parts_id` ASC) USING BTREE,
   CONSTRAINT `reorders_tbl_ibfk_1` FOREIGN KEY (`parts_id`) REFERENCES `motorparts_tbl` (`m_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of reorders_tbl
 -- ----------------------------
-INSERT INTO `reorders_tbl` VALUES (1, 3, 200, 145.00, '2024-07-14', '2024-07-15', '0', '');
-INSERT INTO `reorders_tbl` VALUES (2, 3, 132123, 145.00, '2024-07-06', '2024-07-08', '0', '');
-INSERT INTO `reorders_tbl` VALUES (3, 3, 132123, 145.00, '2024-07-06', '2024-07-08', '0', '');
-INSERT INTO `reorders_tbl` VALUES (4, 3, 1230, 123.00, '2024-07-20', '2024-07-13', '', 'Delivered');
-INSERT INTO `reorders_tbl` VALUES (5, 3, 123123, 145.00, '2024-07-18', '2024-07-19', '', '');
-INSERT INTO `reorders_tbl` VALUES (6, 3, 123, 0.00, '2024-07-06', '2024-07-06', 'the rats', 'Delivered');
-INSERT INTO `reorders_tbl` VALUES (7, 3, 1, 12.00, '2024-07-06', '2024-07-08', 'the rats', 'Delivered');
+INSERT INTO `reorders_tbl` VALUES (1, 3, 10, 150.00, '2024-07-10', '2024-07-15', 'the rats', 'Received');
+INSERT INTO `reorders_tbl` VALUES (2, 3, 20, 145.00, '2024-07-11', '2024-07-20', 'the rats', 'Delivered');
+INSERT INTO `reorders_tbl` VALUES (3, 3, 200, 170.00, '2024-07-13', '2024-07-13', 'the rats', 'Rejected');
+
+-- ----------------------------
+-- Table structure for scheduling_services_tbl
+-- ----------------------------
+DROP TABLE IF EXISTS `scheduling_services_tbl`;
+CREATE TABLE `scheduling_services_tbl`  (
+  `sched_service_id` int NOT NULL AUTO_INCREMENT,
+  `customer_id` int NULL DEFAULT NULL,
+  `vehicle_id` int NULL DEFAULT NULL,
+  `services_id` int NULL DEFAULT NULL,
+  `service_description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `service_date` date NULL DEFAULT NULL,
+  `preferred_time` time NULL DEFAULT NULL,
+  `mechanist_id` int NULL DEFAULT NULL,
+  `technician_notes` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `customer_comments` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `special_instruction` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `status` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`sched_service_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of scheduling_services_tbl
+-- ----------------------------
+INSERT INTO `scheduling_services_tbl` VALUES (1, 4, 0, 11, 'top1 oil', '2024-07-13', '10:47:50', 3, 'make it faster', 'give tip', 'please avoid the bolts to disappear', 'Request');
+INSERT INTO `scheduling_services_tbl` VALUES (2, 4, 6, 9, 'asd', '2024-07-12', '03:00:00', 3, 'asd', 'asd', 'asd', 'Request');
+INSERT INTO `scheduling_services_tbl` VALUES (3, 4, 6, 6, 'asd', '2024-07-12', '05:09:00', 3, 'asd', 'asd', 'asd', 'Request');
 
 -- ----------------------------
 -- Table structure for services_tbl
@@ -165,19 +218,17 @@ CREATE TABLE `services_tbl`  (
   `services_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `price` decimal(10, 2) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of services_tbl
 -- ----------------------------
-INSERT INTO `services_tbl` VALUES (1, 'Car', 'Checkups', 151.00);
-INSERT INTO `services_tbl` VALUES (4, 'Motorcycle', 'Checkup', 150.00);
-INSERT INTO `services_tbl` VALUES (5, 'Motorcycle', 'Checkup', 150.00);
+INSERT INTO `services_tbl` VALUES (1, 'Car', 'Checkup', 151.00);
 INSERT INTO `services_tbl` VALUES (6, 'Motorcycle', 'Checkup', 150.00);
 INSERT INTO `services_tbl` VALUES (7, 'Motorcycle', 'Overhaul', 800.00);
 INSERT INTO `services_tbl` VALUES (8, 'Car', 'Overhaul', 1500.00);
 INSERT INTO `services_tbl` VALUES (9, 'Motorcycle', 'Change Oil', 150.00);
-INSERT INTO `services_tbl` VALUES (10, 'Car', 'Signal Light Wiring', 150.00);
+INSERT INTO `services_tbl` VALUES (11, 'Motorcycle', 'Tune Up', 600.00);
 
 -- ----------------------------
 -- Table structure for suppliers_tbl
@@ -198,9 +249,8 @@ CREATE TABLE `suppliers_tbl`  (
 -- ----------------------------
 -- Records of suppliers_tbl
 -- ----------------------------
-INSERT INTO `suppliers_tbl` VALUES (2, 'Mistery Tech Shops', 'Reymark S. Escalante', 'rey@gmail.com', '1231231231', 'gensans', '2024-07-06 01:55:59', '');
+INSERT INTO `suppliers_tbl` VALUES (2, 'Mistery Tech Shops', 'Reymark S. Escalante', 'rey@gmail.com', '1231231231', 'gensan', '2024-07-06 01:55:59', '');
 INSERT INTO `suppliers_tbl` VALUES (3, 'Starbrigh', 'Gilber', 'gil@gmail.coim', '0914561231231`', 'asd', '2024-07-06 09:29:58', '');
-INSERT INTO `suppliers_tbl` VALUES (4, 'asd', 'as', 'asd@gmail.com', '1231231', 'asdasd', '2024-07-06 09:31:24', '');
 
 -- ----------------------------
 -- Table structure for user_table

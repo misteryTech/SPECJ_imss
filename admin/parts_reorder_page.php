@@ -139,3 +139,8 @@
 <?php
     include("admin_footer.php");
 ?>
+  <script>
+        $(document).ready(function() {
+            $('#parts_datatable').DataTable();
+        });
+    </script>

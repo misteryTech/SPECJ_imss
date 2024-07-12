@@ -10,7 +10,7 @@
         $service_price = $_POST["edit_price"];
 
 
-        $stmt = $connection->prepare("UPDATE services SET services_type=?, services_name=?, price=?
+        $stmt = $connection->prepare("UPDATE services_tbl SET services_type=?, services_name=?, price=?
          WHERE id=?");
 
         $stmt->bind_param("sssi",  $services_type_edit, $services_name,$service_price,$service_edit_id);
@@ -21,7 +21,6 @@
         }else{
                 echo "<script>alert('Failed to Update');</script>";
         }
-
 
 
         $stmt->close();

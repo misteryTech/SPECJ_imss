@@ -12,10 +12,10 @@
     <main id="main" class="main">
 
         <div class="pagetitle">
-            <h1>Customer Management</h1>
+            <h1>Mechanist</h1>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item active">Customer Information</li>
+                    <li class="breadcrumb-item active">Mechanist Information</li>
                 </ol>
             </nav>
         </div><!-- End Page Title -->
@@ -25,10 +25,10 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Customer</h5>
+                            <h5 class="card-title">Mechanist</h5>
 
                             <!-- Multi Columns Form -->
-                            <form class="row g-3" action="process_code/customer_registration.php" method="POST">
+                            <form class="row g-3" action="process_code/mechanist_registration.php" method="POST">
                                 <div class="col-md-6">
                                     <label for="firstname" class="form-label">Firstname</label>
                                     <input type="text" class="form-control" id="firstname" name="firstname" required>
@@ -66,12 +66,12 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">List of Customer</h5>
+                            <h5 class="card-title">List of Mechanist</h5>
                             <table class="table table-hover" id="customer_datatable">
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">Customer Name</th>
+                                        <th scope="col">Mechanist Name</th>
                                         <th scope="col">Phone No.</th>
                                         <th scope="col">Address</th>
                                         <th scope="col">Actions</th>
@@ -79,7 +79,7 @@
                                 </thead>
                                 <tbody>
                                     <?php
-                                        $stmt = $connection->prepare("SELECT * FROM customers_tbl");
+                                        $stmt = $connection->prepare("SELECT * FROM mechanist_tbl");
                                         $stmt->execute();
                                         $result = $stmt->get_result();
                                         $count = 1;
@@ -87,7 +87,7 @@
                                         while($row = $result->fetch_assoc()) {
                                             echo "<tr>";
                                             echo "<td>".$count."</td>";
-                                            echo "<td>".$row['c_firstname'].' '.$row['c_lastname']."</td>";
+                                            echo "<td>".$row['m_firstname'].' '.$row['m_lastname']."</td>";
                                             echo "<td>".$row['phone']."</td>";
                                             echo "<td>".$row['address']."</td>";
                                             echo "<td>";
@@ -106,8 +106,6 @@
                                             echo "<button type='button' class='btn-close' data-dismiss='modal' aria-label='Close'></button>";
                                             echo "</div>";
                                             echo "<div class='modal-body'>";
-
-
                                             echo "<form action='process_code/customer_edit_information.php' method='POST'>";
                                             echo "<input type='hidden' name='customer_id' value='" . $row['id'] . "'>";
 
@@ -128,7 +126,7 @@
 
                                             echo "<div class='form-group'>";
                                             echo "<label for='editPhone" . $row['id'] . "'>Phone</label>";
-                                            echo "<input type='number' class='form-control' id='editPhone" . $row['id'] . "' name='edit_phone' value='" . $row['phone'] . "' required>";
+                                            echo "<input type='text' class='form-control' id='editPhone" . $row['id'] . "' name='edit_phone' value='" . $row['phone'] . "' required>";
                                             echo "</div>";
 
                                             echo "<div class='form-group'>";

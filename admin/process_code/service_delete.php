@@ -7,7 +7,7 @@
 
             $services_id = $_POST["services_id"];
 
-            $stmt = $connection->prepare("DELETE FROM services WHERE id=?");
+            $stmt = $connection->prepare("DELETE FROM services_tbl WHERE id=?");
 
             $stmt->bind_param("i",$services_id);
 
