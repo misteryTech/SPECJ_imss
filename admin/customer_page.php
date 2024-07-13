@@ -54,6 +54,15 @@
                                     <input type="text" class="form-control" id="address" name="address" required>
                                 </div>
 
+                                <div class="col-md-6 mb-3">
+                                    <label for="address" class="form-label">Username</label>
+                                    <input type="text" class="form-control" id="username" name="username" required>
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <label for="address" class="form-label">Password</label>
+                                    <input type="password" class="form-control" id="password" name="password" required>
+                                </div>
                                 <div class="text-center">
                                     <button type="submit" class="btn btn-primary">Submit</button>
                                     <button type="reset" class="btn btn-secondary">Reset</button>
@@ -140,6 +149,19 @@
                                             echo "<label for='editRegistrationDate" . $row['id'] . "'>Registration Date</label>";
                                             echo "<input type='text' class='form-control' id='editRegistrationDate" . $row['id'] . "' name='edit_registration_date' value='" . $row['registrationDate'] . "' required>";
                                             echo "</div>";
+
+
+                                            echo "<div class='form-group'>";
+                                            echo "<label for='editRegistrationDate" . $row['id'] . "'>Username</label>";
+                                            echo "<input type='text' class='form-control' id='editRegistrationDate" . $row['id'] . "' name='edit_username' value='" . $row['username'] . "' required>";
+                                            echo "</div>";
+
+
+                                            echo "<div class='form-group'>";
+                                            echo "<label for='editRegistrationDate" . $row['id'] . "'>Password</label>";
+                                            echo "<input type='password' class='form-control' id='editRegistrationDate" . $row['id'] . "' name='edit_password' value='" . $row['password'] . "' required>";
+                                            echo "</div>";
+
 
                                             echo "</div>";
                                             echo "<div class='modal-footer'>";

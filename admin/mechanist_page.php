@@ -54,6 +54,16 @@
                                     <input type="text" class="form-control" id="address" name="address" required>
                                 </div>
 
+                                <div class="col-md-6 mb-3">
+                                    <label for="address" class="form-label">Username</label>
+                                    <input type="text" class="form-control" id="username" name="username" required>
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <label for="address" class="form-label">Password</label>
+                                    <input type="password" class="form-control" id="password" name="password" required>
+                                </div>
+
                                 <div class="text-center">
                                     <button type="submit" class="btn btn-primary">Submit</button>
                                     <button type="reset" class="btn btn-secondary">Reset</button>
@@ -106,17 +116,17 @@
                                             echo "<button type='button' class='btn-close' data-dismiss='modal' aria-label='Close'></button>";
                                             echo "</div>";
                                             echo "<div class='modal-body'>";
-                                            echo "<form action='process_code/customer_edit_information.php' method='POST'>";
-                                            echo "<input type='hidden' name='customer_id' value='" . $row['id'] . "'>";
+                                            echo "<form action='process_code/mechanist_edit_information.php' method='POST'>";
+                                            echo "<input type='hidden' name='mechanist_id' value='" . $row['id'] . "'>";
 
                                             echo "<div class='form-group'>";
                                             echo "<label for='editFirstname" . $row['id'] . "'>Firstname</label>";
-                                            echo "<input type='text' class='form-control' id='editFirstname" . $row['id'] . "' name='edit_firstname' value='" . $row['c_firstname'] . "' required>";
+                                            echo "<input type='text' class='form-control' id='editFirstname" . $row['id'] . "' name='edit_firstname' value='" . $row['m_firstname'] . "' required>";
                                             echo "</div>";
 
                                             echo "<div class='form-group'>";
                                             echo "<label for='editLastname" . $row['id'] . "'>Lastname</label>";
-                                            echo "<input type='text' class='form-control' id='editLastname" . $row['id'] . "' name='edit_lastname' value='" . $row['c_lastname'] . "' required>";
+                                            echo "<input type='text' class='form-control' id='editLastname" . $row['id'] . "' name='edit_lastname' value='" . $row['m_lastname'] . "' required>";
                                             echo "</div>";
 
                                             echo "<div class='form-group'>";
@@ -139,6 +149,19 @@
                                             echo "<input type='text' class='form-control' id='editRegistrationDate" . $row['id'] . "' name='edit_registration_date' value='" . $row['registrationDate'] . "' required>";
                                             echo "</div>";
 
+
+                                            echo "<div class='form-group'>";
+                                            echo "<label for='editRegistrationDate" . $row['id'] . "'>Registration Date</label>";
+                                            echo "<input type='text' class='form-control' id='editUsername" . $row['id'] . "' name='edit_username' value='" . $row['username'] . "' required>";
+                                            echo "</div>";
+
+
+                                            echo "<div class='form-group'>";
+                                            echo "<label for='editRegistrationDate" . $row['id'] . "'>Registration Date</label>";
+                                            echo "<input type='password' class='form-control' id='editPassword" . $row['id'] . "' name='edit_password' value='" . $row['password'] . "' required>";
+                                            echo "</div>";
+
+
                                             echo "</div>";
                                             echo "<div class='modal-footer'>";
                                             echo "<button type='submit' class='btn btn-primary'>Save Changes</button>";
@@ -154,14 +177,14 @@
                                             echo "<div class='modal-dialog' role='document'>";
                                             echo "<div class='modal-content'>";
                                             echo "<div class='modal-header'>";
-                                            echo "<h5 class='modal-title' id='deleteModalLabel" . $row['id'] . "'>Delete Customer</h5>";
+                                            echo "<h5 class='modal-title' id='deleteModalLabel" . $row['id'] . "'>Delete Mechanist</h5>";
                                             echo "</div>";
                                             echo "<div class='modal-body'>";
-                                            echo "<p>Are you sure you want to delete this customer?</p>";
+                                            echo "<p>Are you sure you want to delete this mechanist?</p>";
                                             echo "</div>";
                                             echo "<div class='modal-footer'>";
-                                            echo "<form action='process_code/customer_delete.php' method='POST' style='display:inline;'>";
-                                            echo "<input type='hidden' name='customer_id' value='" . $row['id'] . "'>";
+                                            echo "<form action='process_code/mechanist_delete.php' method='POST' style='display:inline;'>";
+                                            echo "<input type='hidden' name='mechanist_id' value='" . $row['id'] . "'>";
                                             echo "<button type='submit' class='btn btn-danger'>Delete</button>";
                                             echo "<button type='button' class='btn btn-secondary' data-dismiss='modal'>Cancel</button>";
                                             echo "</form>";

@@ -10,15 +10,17 @@
         $email = $_POST["email"];
         $phone = $_POST["phone"];
         $address = $_POST["address"];
+        $username = $_POST["username"];
+        $password = $_POST["password"];
 
 
         // Prepare an SQL statement to insert data into the database
         $stmt = $connection->prepare("INSERT INTO suppliers_tbl
-                (supplierName, contactPerson, email, phone, address)
-                VALUES (?, ?, ?, ?, ?)");
+                (supplierName, contactPerson, email, phone, address, username, password)
+                VALUES (?, ?, ?, ?, ?, ?, ?)");
 
         // Bind parameters to the prepared statement
-        $stmt->bind_param("sssss", $supplierName, $contactPerson, $email, $phone, $address);
+        $stmt->bind_param("sssssss", $supplierName, $contactPerson, $email, $phone, $address, $username, $password);
 
         // Execute the prepared statement
         if($stmt->execute()){

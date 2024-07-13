@@ -51,6 +51,19 @@
                                     <label for="address" class="form-label">Address</label>
                                     <input type="text" class="form-control" id="address" name="address" required>
                                 </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <label for="Username" class="form-label">Username</label>
+                                    <input type="text" class="form-control" id="username" name="username" required>
+                                </div>
+
+
+                                <div class="col-md-6 mb-3">
+                                    <label for="Password" class="form-label">Password</label>
+                                    <input type="passowrd" class="form-control" id="password" name="password" required>
+                                </div>
+
+
                                 <div class="text-center">
                                     <button type="submit" class="btn btn-primary">Submit</button>
                                     <button type="reset" class="btn btn-secondary">Reset</button>
@@ -130,6 +143,20 @@
                                             echo "<label for='editRegistrationDate{$row['id']}'>Registration Date</label>";
                                             echo "<input type='text' class='form-control' id='editRegistrationDate{$row['id']}' name='registrationDate' value='{$row['registrationDate']}' required>";
                                             echo "</div>";
+
+
+                                            echo "<div class='form-group'>";
+                                            echo "<label for='editUsername{$row['id']}'>Username</label>";
+                                            echo "<input type='text' class='form-control' id='editUsername{$row['id']}' name='edit_username' value='{$row['username']}' required>";
+                                            echo "</div>";
+
+
+                                            echo "<div class='form-group'>";
+                                            echo "<label for='editPassword{$row['id']}'>Password</label>";
+                                            echo "<input type='password' class='form-control' id='editPassword{$row['id']}' name='edit_password' value='{$row['password']}' required>";
+                                            echo "</div>";
+
+
                                             echo "</div>";
                                             echo "<div class='modal-footer'>";
                                             echo "<button type='submit' class='btn btn-primary'>Save Changes</button>";

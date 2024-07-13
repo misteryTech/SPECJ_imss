@@ -12,7 +12,7 @@
         $password = $_POST["password"];
 
 
-        $stmt = $connection->prepare("SELECT id, firstname,lastname,email FROM user_table WHERE username = ? AND password= ?");
+        $stmt = $connection->prepare("SELECT id, firstname,lastname,email FROM customer_tbl WHERE username = ? AND password= ?");
 
 
         $stmt->bind_param("ss",$username,$password);
@@ -33,7 +33,7 @@
                     $_SESSION['email'] = $email;
                     $_SESSION['username'] = $username;
 
-                    header("location: ../admin/admin_dashboard.php");
+                    header("location: ../customer/user_dashboard.php");
                     exit();
         }else{
               echo "Invalid Data";

@@ -34,6 +34,7 @@ include("admin_header.php");
                                 $scheduleQuery = "
                                     SELECT
                                         ss.sched_service_id,
+                                        ss.status,
                                         s.services_name,
                                         ss.service_date,
                                         v.license_plate AS vehicle_no
@@ -59,6 +60,7 @@ include("admin_header.php");
                                     echo "<th>Service Name</th>";
                                     echo "<th>Vehicle Plate Number</th>";
                                     echo "<th>Service Date</th>";
+                                    echo "<th>Status</th>";
                                     echo "</tr>";
                                     echo "</thead>";
                                     echo "<tbody>";
@@ -68,6 +70,7 @@ include("admin_header.php");
                                         echo "<td>" . htmlspecialchars($scheduleRow['services_name']) . "</td>";
                                         echo "<td>" . htmlspecialchars($scheduleRow['vehicle_no']) . "</td>";
                                         echo "<td>" . htmlspecialchars($scheduleRow['service_date']) . "</td>";
+                                        echo "<td>" . htmlspecialchars($scheduleRow['status']) . "</td>";
                                         echo "</tr>";
                                     }
                                     echo "</tbody>";
