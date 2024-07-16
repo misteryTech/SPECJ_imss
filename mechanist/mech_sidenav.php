@@ -3,7 +3,7 @@
 <ul class="sidebar-nav" id="sidebar-nav">
 
   <li class="nav-item">
-    <a class="nav-link " href="admin_dashboard.php">
+    <a class="nav-link " href="mech_dashboard.php">
       <i class="bi bi-grid"></i>
       <span>Dashboard</span>
     </a>
@@ -17,12 +17,7 @@
     <ul id="service-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
 
 
-    <li>
-      <li>
-        <a href="schedule_services_page.php">
-          <i class="bi bi-circle"></i><span>Schedule Service</span>
-        </a>
-      </li>
+
       <li>
         <a href="services_calendar_schedule.php">
           <i class="bi bi-circle"></i><span>View Calendar Schedule</span>
@@ -33,7 +28,11 @@
           <i class="bi bi-circle"></i><span>Manage Work Orders</span>
         </a>
       </li>
-
+      <li>
+        <a href="mechanist_assign_services.php">
+          <i class="bi bi-circle"></i><span>Mechanist Assignment</span>
+        </a>
+      </li>
 
 
     </ul>

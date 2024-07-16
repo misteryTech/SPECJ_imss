@@ -1,7 +1,16 @@
 <?php
 include("connection.php");
 
-// Query to fetch scheduled services with customer name, service name, and mechanist name
+// Ensure mechanic_id is provided and sanitize it
+if(isset($_GET['mechanic_id'])) {
+    $mechanic_id = intval($_GET['mechanic_id']); // Assuming mechanic_id is an integer
+} else {
+    // Handle error if mechanic_id is not provided
+    echo json_encode(array('error' => 'Mechanic ID not provided'));
+    exit;
+}
+
+// Query to fetch scheduled services with customer name, service name, and mechanic name filtered by mechanic_id
 $query = "
     SELECT
         ss.sched_service_id,
@@ -34,9 +43,20 @@ $query = "
         c_vehicles_registration_tbl c_v ON ss.vehicle_id = c_v.id
     WHERE
         ss.status = 'Request'
+        AND ss.mechanist_id = ?
 ";
 
-$result = $connection->query($query);
+// Prepare the query
+$stmt = $connection->prepare($query);
+
+// Bind parameter
+$stmt->bind_param('i', $mechanic_id);
+
+// Execute query
+$stmt->execute();
+
+// Get result set
+$result = $stmt->get_result();
 
 $events = [];
 
@@ -44,7 +64,10 @@ while($row = $result->fetch_assoc()) {
     $events[] = $row;
 }
 
+// Output JSON encoded array
 echo json_encode($events);
 
+// Close statement and connection
+$stmt->close();
 $connection->close();
 ?>
