@@ -43,7 +43,7 @@
       <i class="bi bi-person"></i>
       <span>Mechanist</span>
     </a>
-  </li><!-
+  </li>
 
 
 </ul>

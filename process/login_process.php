@@ -12,7 +12,7 @@
         $password = $_POST["password"];
 
 
-        $stmt = $connection->prepare("SELECT id, firstname,lastname,email FROM customer_tbl WHERE username = ? AND password= ?");
+        $stmt = $connection->prepare("SELECT id, c_firstname,c_lastname,email FROM customers_tbl WHERE username = ? AND password= ?");
 
 
         $stmt->bind_param("ss",$username,$password);
@@ -28,15 +28,16 @@
 
                     $_SESSION['loggedin'] = true;
                     $_SESSION['id'] = $id;
-                    $_SESSION['firstname'] = $firstname;
-                    $_SESSION['lastname'] = $lastname;
+                    $_SESSION['c_firstname'] = $firstname;
+                    $_SESSION['c_lastname'] = $lastname;
                     $_SESSION['email'] = $email;
                     $_SESSION['username'] = $username;
 
                     header("location: ../customer/user_dashboard.php");
                     exit();
         }else{
-              echo "Invalid Data";
+            echo "<script>alert('Invalid Username or Password')</script>";
+            echo "<script>window.location.href='../login.php'</script>";
                 }
 
             $stmt->close();

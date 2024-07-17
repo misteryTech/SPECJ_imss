@@ -175,7 +175,7 @@
 
       <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
         <li class="dropdown-header">
-          <h6><?php echo htmlspecialchars($_SESSION['firstname']). ' ' .  htmlspecialchars($_SESSION['lastname']); ?></h6>
+          <h6><?php echo htmlspecialchars($_SESSION['m_firstname']). ' ' .  htmlspecialchars($_SESSION['m_lastname']); ?></h6>
           <span>Web Designer</span>
         </li>
         <li>

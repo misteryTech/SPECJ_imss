@@ -36,7 +36,8 @@
                     header("location: ../supplier/supplier_dashboard.php");
                     exit();
         }else{
-              echo "Invalid Data";
+            echo "<script>alert('Invalid Username or Password')</script>";
+            echo "<script>window.location.href='../supplier_login.php'</script>";
                 }
 
             $stmt->close();

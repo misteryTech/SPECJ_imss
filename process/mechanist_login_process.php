@@ -28,15 +28,16 @@
 
                     $_SESSION['loggedin'] = true;
                     $_SESSION['id'] = $id;
-                    $_SESSION['firstname'] = $firstname;
-                    $_SESSION['lastname'] = $lastname;
+                    $_SESSION['m_firstname'] = $firstname;
+                    $_SESSION['m_lastname'] = $lastname;
                     $_SESSION['email'] = $email;
                     $_SESSION['username'] = $username;
 
                     header("location: ../mechanist/mech_dashboard.php");
                     exit();
         }else{
-              echo "Invalid Data";
+            echo "<script>alert('Invalid Username or Password')</script>";
+            echo "<script>window.location.href='../mechanist_login.php'</script>";
                 }
 
             $stmt->close();
