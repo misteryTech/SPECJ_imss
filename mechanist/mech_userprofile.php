@@ -9,14 +9,22 @@
         include("mech_topnav.php");
         include("mech_sidenav.php");
 
-        session_start();
-        if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-            header("location: ../mechanist_login.php");
-            exit();
-        }
 
-        $fullname = htmlspecialchars($_SESSION['m_firstname']) . ' ' . htmlspecialchars($_SESSION['m_lastname']);
-        $email = htmlspecialchars($_SESSION['email']);
+        $mech_id = htmlspecialchars($_SESSION['id']);
+        $stmt = $connection->prepare("SELECT id, m_firstname, m_lastname, phone, address, username, password, email FROM mechanist_tbl WHERE id='$mech_id'");
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        $mech_details = $result->fetch_assoc();
+
+        $fullname = $mech_details['m_firstname']. ' ' . $mech_details['m_lastname'];
+        $phone = $mech_details['phone'];
+        $address = $mech_details['address'];
+        $username = $mech_details['username'];
+        $password = $mech_details['password'];
+        $email = $mech_details['email'];
+
+
     ?>
 
     <main id="main" class="main">
@@ -71,12 +79,12 @@
 
                                     <div class="row">
                                         <div class="col-lg-3 col-md-4 label">Phone</div>
-                                        <div class="col-lg-9 col-md-8"></div>
+                                        <div class="col-lg-9 col-md-8"><?php echo $phone; ?></div>
                                     </div>
 
                                     <div class="row">
                                         <div class="col-lg-3 col-md-4 label">Address</div>
-                                        <div class="col-lg-9 col-md-8"></div>
+                                        <div class="col-lg-9 col-md-8"><?php echo $address; ?></div>
                                     </div>
 
                                     <div class="row">
@@ -86,13 +94,9 @@
 
                                     <div class="row">
                                         <div class="col-lg-3 col-md-4 label">Username</div>
-                                        <div class="col-lg-9 col-md-8"><?php echo htmlspecialchars($_SESSION['username']); ?></div>
+                                        <div class="col-lg-9 col-md-8"><?php echo $username; ?></div>
                                     </div>
 
-                                    <div class="row">
-                                        <div class="col-lg-3 col-md-4 label">Password</div>
-                                        <div class="col-lg-9 col-md-8"></div>
-                                    </div>
                                 </div>
 
                                 <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
