@@ -53,7 +53,7 @@ include("mech_header.php");
                                 $scheduleResult = $scheduleStmt->get_result();
 
                                 if ($scheduleResult->num_rows > 0) {
-                                    echo "<table id='bookedServicesTable' class='table table-hovered'>";
+                                    echo "<table id='bookedServicesTable' class='table table-hover'>";
                                     echo "<thead>";
                                     echo "<tr>";
                                     echo "<th>Schedule ID</th>";
@@ -71,9 +71,23 @@ include("mech_header.php");
                                         echo "<td>" . htmlspecialchars($scheduleRow['services_name']) . "</td>";
                                         echo "<td>" . htmlspecialchars($scheduleRow['vehicle_no']) . "</td>";
                                         echo "<td>" . htmlspecialchars($scheduleRow['service_date']) . "</td>";
-                                        echo "<td>" . htmlspecialchars($scheduleRow['status']) . "</td>";
+                                        echo "<td>";
+                                        if ($scheduleRow['status'] == 'Request') {
+                                            echo "<h5><span class='badge rounded-pill bg-warning'>" . $scheduleRow['status'] . "</span></h5>";
+                                        } else if ($scheduleRow['status'] == 'Accept'){
+                                            echo "<h5><span class='badge rounded-pill bg-success'>" . $scheduleRow['status'] . "</span></h5>";
+                                        } else {
+                                            echo "<h5><span class='badge rounded-pill bg-danger'>" . $scheduleRow['status'] . "</span></h5>";
+                                        }
+                                        echo "</td>";
                                         // Button to view details in modal
-                                        echo "<td><button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#exampleModal'>View Details</button></td>";
+                                        echo "<td>
+                                        <div class='d-flex'>
+                                            <button type='button' class='btn btn-primary accept-btn' data-id='" . $scheduleRow['sched_service_id'] . "'>Accept</button>
+                                            <span class='mx-1'></span>
+                                            <button type='button' class='btn btn-danger reject-btn' data-id='" . $scheduleRow['sched_service_id'] . "'>Reject</button>
+                                        </div>
+                                        </td>";
                                         echo "</tr>";
                                     }
                                     echo "</tbody>";
@@ -92,26 +106,6 @@ include("mech_header.php");
         </section>
     </main><!-- End #main -->
 
-    <!-- Modal for Approved Jobs -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Approved Job Details</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <!-- Placeholder content for modal details -->
-                    <p>Job details will be displayed here.</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <!-- Add additional actions or buttons as needed -->
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- ======= Footer ======= -->
     <?php
     include("mech_footer.php");
@@ -121,6 +115,40 @@ include("mech_header.php");
     <script>
         $(document).ready(function () {
             $('#bookedServicesTable').DataTable();
+
+            // Handle accept button click
+            $('.accept-btn').on('click', function () {
+                var schedServiceId = $(this).data('id');
+                $.ajax({
+                    url: 'process_code/mech_accept_service.php',
+                    type: 'POST',
+                    data: { sched_service_id: schedServiceId },
+                    success: function (response) {
+                        alert('Service accepted successfully!');
+                        location.reload();
+                    },
+                    error: function () {
+                        alert('Failed to accept the service.');
+                    }
+                });
+            });
+
+            // Handle reject button click (if needed)
+            $('.reject-btn').on('click', function () {
+                var schedServiceId = $(this).data('id');
+                $.ajax({
+                    url: 'process_code/mech_declined_service.php', // Create this file if needed
+                    type: 'POST',
+                    data: { sched_service_id: schedServiceId },
+                    success: function (response) {
+                        alert('Service rejected successfully!');
+                        location.reload();
+                    },
+                    error: function () {
+                        alert('Failed to reject the service.');
+                    }
+                });
+            });
         });
     </script>
 

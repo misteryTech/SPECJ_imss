@@ -38,12 +38,6 @@
     </ul>
   </li><!-- End Components Nav -->
 
-  <li class="nav-item">
-    <a class="nav-link collapsed" href="mechanist_page.php">
-      <i class="bi bi-person"></i>
-      <span>Mechanist</span>
-    </a>
-  </li>
 
 
 </ul>

@@ -4,6 +4,6 @@
     session_destroy();
 
 
-    header("location: ../login.php");
+    header("location: ../mechanist_login.php");
     exit();
 ?>

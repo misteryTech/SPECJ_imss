@@ -18,6 +18,8 @@
         $mech_details = $result->fetch_assoc();
 
         $fullname = $mech_details['m_firstname']. ' ' . $mech_details['m_lastname'];
+        $firstname = $mech_details['m_firstname'];
+        $lastname = $mech_details['m_lastname'];
         $phone = $mech_details['phone'];
         $address = $mech_details['address'];
         $username = $mech_details['username'];
@@ -101,90 +103,64 @@
 
                                 <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
                                     <!-- Profile Edit Form -->
-                                    <form method="POST" action="update_profile.php">
+                                    <form method="POST" action="process_code/mechanist_edit_information.php">
+
+                                            <input type="text" value="<?php echo $mech_id; ?>"  name="mechanist_id" hidden>
+
                                         <div class="row mb-3">
-                                            <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Full Name</label>
+                                            <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Firstname</label>
                                             <div class="col-md-8 col-lg-9">
-                                                <input name="fullName" type="text" class="form-control" id="fullName" value="<?php echo $fullname; ?>">
+                                                <input name="edit_firstname" type="text" class="form-control" id="fullName" value="<?php echo $firstname; ?>">
+                                            </div>
+                                        </div>
+
+
+                                        <div class="row mb-3">
+                                            <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Lastname</label>
+                                            <div class="col-md-8 col-lg-9">
+                                                <input name="edit_lastname" type="text" class="form-control" id="fullName" value="<?php echo $lastname; ?>">
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="row mb-3">
+                                            <label for="about" class="col-md-4 col-lg-3 col-form-label">Email</label>
+                                            <div class="col-md-8 col-lg-9">
+                                            <input name="edit_email" type="email" class="form-control" id="email" value="<?php echo $email; ?>">
                                             </div>
                                         </div>
 
                                         <div class="row mb-3">
-                                            <label for="about" class="col-md-4 col-lg-3 col-form-label">About</label>
+                                            <label for="company" class="col-md-4 col-lg-3 col-form-label">Phone</label>
                                             <div class="col-md-8 col-lg-9">
-                                                <textarea name="about" class="form-control" id="about" style="height: 100px"></textarea>
+                                                <input name="edit_phone" type="number" class="form-control" id="company" value="<?php echo $phone; ?>">
                                             </div>
                                         </div>
 
                                         <div class="row mb-3">
-                                            <label for="company" class="col-md-4 col-lg-3 col-form-label">Company</label>
+                                            <label for="Job" class="col-md-4 col-lg-3 col-form-label">Address</label>
                                             <div class="col-md-8 col-lg-9">
-                                                <input name="company" type="text" class="form-control" id="company" value="">
+                                                <input name="edit_address" type="text" class="form-control" id="address" value="<?php echo $address; ?>">
                                             </div>
                                         </div>
 
                                         <div class="row mb-3">
-                                            <label for="Job" class="col-md-4 col-lg-3 col-form-label">Job</label>
+                                            <label for="Country" class="col-md-4 col-lg-3 col-form-label">Username</label>
                                             <div class="col-md-8 col-lg-9">
-                                                <input name="job" type="text" class="form-control" id="Job" value="">
+                                                <input name="edit_username" type="text" class="form-control" id="Country" value="<?php echo $username; ?>">
                                             </div>
                                         </div>
 
                                         <div class="row mb-3">
-                                            <label for="Country" class="col-md-4 col-lg-3 col-form-label">Country</label>
+                                            <label for="Address" class="col-md-4 col-lg-3 col-form-label">Password</label>
                                             <div class="col-md-8 col-lg-9">
-                                                <input name="country" type="text" class="form-control" id="Country" value="">
+                                                <input name="edit_password" type="password" class="form-control" id="password" value="<?php echo $password; ?>">
                                             </div>
                                         </div>
 
-                                        <div class="row mb-3">
-                                            <label for="Address" class="col-md-4 col-lg-3 col-form-label">Address</label>
-                                            <div class="col-md-8 col-lg-9">
-                                                <input name="address" type="text" class="form-control" id="Address" value="">
-                                            </div>
-                                        </div>
 
-                                        <div class="row mb-3">
-                                            <label for="Phone" class="col-md-4 col-lg-3 col-form-label">Phone</label>
-                                            <div class="col-md-8 col-lg-9">
-                                                <input name="phone" type="text" class="form-control" id="Phone" value="">
-                                            </div>
-                                        </div>
 
-                                        <div class="row mb-3">
-                                            <label for="Email" class="col-md-4 col-lg-3 col-form-label">Email</label>
-                                            <div class="col-md-8 col-lg-9">
-                                                <input name="email" type="email" class="form-control" id="Email" value="<?php echo htmlspecialchars($_SESSION['email']); ?>">
-                                            </div>
-                                        </div>
-
-                                        <div class="row mb-3">
-                                            <label for="Twitter" class="col-md-4 col-lg-3 col-form-label">Twitter Profile</label>
-                                            <div class="col-md-8 col-lg-9">
-                                                <input name="twitter" type="text" class="form-control" id="Twitter" value="">
-                                            </div>
-                                        </div>
-
-                                        <div class="row mb-3">
-                                            <label for="Facebook" class="col-md-4 col-lg-3 col-form-label">Facebook Profile</label>
-                                            <div class="col-md-8 col-lg-9">
-                                                <input name="facebook" type="text" class="form-control" id="Facebook" value="">
-                                            </div>
-                                        </div>
-
-                                        <div class="row mb-3">
-                                            <label for="Instagram" class="col-md-4 col-lg-3 col-form-label">Instagram Profile</label>
-                                            <div class="col-md-8 col-lg-9">
-                                                <input name="instagram" type="text" class="form-control" id="Instagram" value="">
-                                            </div>
-                                        </div>
-
-                                        <div class="row mb-3">
-                                            <label for="Linkedin" class="col-md-4 col-lg-3 col-form-label">Linkedin Profile</label>
-                                            <div class="col-md-8 col-lg-9">
-                                                <input name="linkedin" type="text" class="form-control" id="Linkedin" value="">
-                                            </div>
-                                        </div>
 
                                         <div class="text-center">
                                             <button type="submit" class="btn btn-primary">Save Changes</button>
