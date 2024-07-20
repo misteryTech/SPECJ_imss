@@ -12,7 +12,7 @@
         $password = $_POST["password"];
 
 
-        $stmt = $connection->prepare("SELECT id, m_firstname,m_lastname,email FROM suppliers_tbl WHERE username = ? AND password= ?");
+        $stmt = $connection->prepare("SELECT id, supplierName,contactPerson,email FROM suppliers_tbl WHERE username = ? AND password= ?");
 
 
         $stmt->bind_param("ss",$username,$password);
@@ -23,17 +23,17 @@
 
         if($stmt->num_rows == 1){
 
-                $stmt->bind_result($id,$firstname,$lastname,$email);
+                $stmt->bind_result($id,$supplierName,$contactPerson,$email);
                 $stmt->fetch();
 
                     $_SESSION['loggedin'] = true;
                     $_SESSION['id'] = $id;
-                    $_SESSION['firstname'] = $firstname;
-                    $_SESSION['lastname'] = $lastname;
+                    $_SESSION['supplierName'] = $supplierName;
+                    $_SESSION['contactPerson'] = $contactPerson;
                     $_SESSION['email'] = $email;
                     $_SESSION['username'] = $username;
 
-                    header("location: ../supplier/supplier_dashboard.php");
+                    header("location: ../supplier/supp_dashboard.php");
                     exit();
         }else{
             echo "<script>alert('Invalid Username or Password')</script>";
