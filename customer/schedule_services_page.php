@@ -81,35 +81,11 @@
                     <form class="row g-3" action="process_code/services_schedule_registration.php" method="POST">
 
                         <!-- Customer Information -->
-                        <div class="col-12">
-                            <h6>Customer Information</h6>
-                            <hr>
-                        </div>
+
+
                         <div class="col-md-6">
-                            <label for="customer_name" class="form-label">Customer Name</label>
-                            <select name="customer_name" id="customer_name" class="form-select" onchange="updateCustomerInfo()">
-                                <option value="" selected>Select Customer</option>
-                                <?php foreach ($customers as $customerId => $customerData) : ?>
-                                    <option value="<?php echo $customerId; ?>">
-                                        <?php echo htmlspecialchars($customerData['customer_info']['c_firstname'] . ' ' . $customerData['customer_info']['c_lastname']); ?>
-                                    </option>
-                                <?php endforeach; ?>
-                            </select>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="phone" class="form-label">Contact Number</label>
-                            <input type="text" class="form-control" id="phone" name="phone" readonly>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="email" class="form-label">Email Address</label>
-                            <input type="email" class="form-control" id="email" name="email" readonly>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="address" class="form-label">Address</label>
-                            <input type="text" class="form-control" id="address" name="address" readonly>
-                        </div>
-                        <div class="col-md-6">
-                            <input type="text" hidden class="form-control" id="customer_id" name="customer_id" readonly>
+
+                            <input type="text" class="form-control" id="customer_name" name="customer_name" value="<?php  echo $_SESSION['id']; ?>" >
                         </div>
 
                         <!-- Vehicle Information -->

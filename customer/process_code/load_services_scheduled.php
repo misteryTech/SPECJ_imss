@@ -1,6 +1,8 @@
 <?php
 include("connection.php");
 
+$id = $_SESSION['id'];
+
 // Query to fetch scheduled services with customer name, service name, and mechanist name
 $query = "
     SELECT
@@ -33,7 +35,7 @@ $query = "
     INNER JOIN
         c_vehicles_registration_tbl c_v ON ss.vehicle_id = c_v.id
     WHERE
-        ss.status = 'Request'
+        ss.status = 'Accept' AND ss.customer_id = '$id'
 ";
 
 $result = $connection->query($query);

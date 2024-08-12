@@ -1,13 +1,13 @@
 <?php
-    include("admin_header.php");
+    include("supp_header.php");
 ?>
 <body>
 
     <!-- ======= Header ======= -->
     <!-- ======= Sidebar ======= -->
     <?php
-        include("admin_topnav.php");
-        include("admin_sidenav.php");
+        include("supp_topnav.php");
+        include("supp_sidenav.php");
     ?>
 
     <!-- Main-->
@@ -181,7 +181,7 @@
 
     <!-- ======= Footer ======= -->
     <?php
-        include("admin_footer.php");
+        include("supp_footer.php");
     ?>
 
 

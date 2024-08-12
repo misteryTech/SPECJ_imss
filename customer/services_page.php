@@ -24,41 +24,6 @@
 
         <section class="section">
             <div class="row">
-                <div class="col-lg-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Add Services</h5>
-
-                            <!-- Multi Columns Form -->
-                            <form class="row g-3" action="process_code/Services_registration.php" method="POST">
-                                <div class="col-md-4">
-                                    <label for="services_type" class="form-label">Services Type</label>
-                                    <select name="services_type" id="services_type" class="form-select">
-                                        <option selected>Select Type Of Vehicle</option>
-                                        <option value="Car">Car</option>
-                                        <option value="Motorcycle">Motorcycle</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="services_name" class="form-label">Services Name</label>
-                                    <input type="text" class="form-control" id="services_name" name="services_name">
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="price" class="form-label">Price</label>
-                                    <input type="number" class="form-control" id="price" name="price">
-                                </div>
-                                <div class="text-center">
-                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                    <button type="reset" class="btn btn-secondary">Reset</button>
-
-
-
-
-                                </div>
-                            </form><!-- End Multi Columns Form -->
-                        </div>
-                    </div>
-                </div>
 
                 <div class="col-lg-12">
                     <div class="card">
@@ -71,7 +36,7 @@
                                         <th scope="col">Services Name</th>
                                         <th scope="col">Services Type</th>
                                         <th scope="col">Prices</th>
-                                        <th scope="col">Actions</th>
+
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -87,10 +52,6 @@
                                             echo "<td>".$row['services_name']."</td>";
                                             echo "<td>".$row['services_type']."</td>";
                                             echo "<td>".$row['price']."</td>";
-                                            echo "<td>";
-                                            echo "<button class='btn btn-primary' data-toggle='modal' data-target='#editModal" . $row['id'] . "'>Edit</button> ";
-                                            echo "<button class='btn btn-danger' data-toggle='modal' data-target='#deleteModal" . $row['id'] . "'>Delete</button>";
-                                            echo "</td>";
                                             echo "</tr>";
 
                                             $count++;
