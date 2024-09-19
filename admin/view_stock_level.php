@@ -180,7 +180,7 @@ include("admin_sidenav.php");
 
                                         while ($row = $result->fetch_assoc()) {
                                             echo "<tr>";
-                                            echo "<td>" . $count . "</td>";
+                                              echo "<td>" . $count . "</td>";
                                             echo "<td>" . $row['parts_name'] . "</td>";
                                             echo "<td>" . $row['price'] . "</td>";
                                             echo "<td>" . $row['QuantityInStock'] . "</td>";

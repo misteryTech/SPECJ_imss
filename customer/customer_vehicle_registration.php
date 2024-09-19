@@ -1,11 +1,11 @@
-<?php include("admin_header.php"); ?>
+<?php include("user_header.php"); ?>
 <body>
 
     <!-- ======= Header ======= -->
     <!-- ======= Sidebar ======= -->
     <?php
-        include("admin_topnav.php");
-        include("admin_sidenav.php");
+        include("user_topnav.php");
+        include("user_sidenav.php");
 
         // Database connection assumed to be established earlier
         // Fetch limited number of customers
@@ -20,23 +20,71 @@
         }
 
 
-        
+        // Ensure that session is started
 
-        // Query to fetch customers with their vehicle registration details
-        $sql_vehicle = "SELECT c.id, c.c_firstname, c.c_lastname, c.phone, c.email, c.address,
-                        v.vehicle_model, v.vehicle_year, v.license_plate, v.mileage, v.vin, v.registration_date, v.notes, v.id AS vehicle_id
-                        FROM customers_tbl c
-                        INNER JOIN c_vehicles_registration_tbl v ON c.id = v.customer_id";
+        // Check if customer ID exists in the session
+        if (isset($_SESSION['id'])) {
+            // Prepare the SQL query to fetch customers with their vehicle registration details
+            $sql_vehicle = "
+                SELECT
+                    c.id,
+                    c.c_firstname,
+                    c.c_lastname,
+                    c.phone,
+                    c.email,
+                    c.address,
+                    v.vehicle_model,
+                    v.vehicle_year,
+                    v.license_plate,
+                    v.mileage,
+                    v.vin,
+                    v.registration_date,
+                    v.notes,
+                    v.id AS vehicle_id
+                FROM
+                    customers_tbl c
+                INNER JOIN
+                    c_vehicles_registration_tbl v
+                ON
+                    c.id = v.customer_id
+                WHERE
+                    v.customer_id = ?
+            ";
 
-        $result = $connection->query($sql_vehicle);
+            // Prepare and bind parameters to avoid SQL injection
+            if ($stmt = $connection->prepare($sql_vehicle)) {
+                // Bind the customer ID from the session
+                $stmt->bind_param("i", $_SESSION['id']);
 
-        $c_vehicle = [];
-        if ($result->num_rows > 0) {
-            while($row = $result->fetch_assoc()) {
-                $c_vehicle[] = $row;
+                // Execute the statement
+                $stmt->execute();
+
+                // Get the result
+                $result = $stmt->get_result();
+
+                $c_vehicle = [];
+                // Fetch data and store it in an array
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        $c_vehicle[] = $row;
+                    }
+                }
+
+                // Close the statement
+                $stmt->close();
+            } else {
+                // Handle SQL preparation error
+                echo "Error preparing the statement: " . $connection->error;
             }
+        } else {
+            echo "Customer ID not found in session.";
         }
+
+        // Close the database connection
+        $connection->close();
     ?>
+
+
 
     <!-- Main -->
     <main id="main" class="main">
@@ -59,16 +107,10 @@
                             <!-- Customer Registration Form -->
                             <form class="row g-3" action="process_code/customer_vehicle_registration.php" method="POST">
                                 <div class="col-md-6">
-                                    <label for="customer_name" class="form-label">Customer Name</label>
-                                    <select name="customer_name" id="customer_name" class="form-select" onchange="updateCustomerInfo()">
-                                        <option value="" selected>Select Customer</option>
-                                        <?php foreach ($customers as $customer) : ?>
-                                            <option value="<?php echo htmlspecialchars($customer['id']); ?>">
-                                                <?php echo htmlspecialchars($customer['c_firstname'] . ' ' . $customer['c_lastname']); ?>
-                                            </option>
-                                        <?php endforeach; ?>
-                                    </select>
+                                <label for="vehicle_model" class="form-label">MY ID</label>
+                                <input type="text" class="form-control" id="customer_name" name="customer_name" value="<?php  echo $_SESSION['id']; ?>" readonly >
                                 </div>
+
                                 <div class="col-md-6">
                                     <label for="vehicle_model" class="form-label">Vehicle Model</label>
                                     <input type="text" class="form-control" id="vehicle_model" name="vehicle_model" required>
@@ -236,7 +278,7 @@
     </main><!-- End #main -->
 
     <!-- ======= Footer ======= -->
-    <?php include("admin_footer.php"); ?>
+    <?php include("user_footer.php"); ?>
 
 </body>
 </html>

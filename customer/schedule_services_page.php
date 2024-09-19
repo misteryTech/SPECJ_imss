@@ -1,65 +1,85 @@
 <?php
     include("user_header.php");
-?>
-<body>
-
-     <!-- ======= Header ======= -->
-     <!-- ======= Sidebar ======= -->
-<?php
     include("user_topnav.php");
     include("user_sidenav.php");
+
+    // Ensure the database connection is established
+    // Example connection code (you should adapt it to your actual connection setup)
+    // $connection = new mysqli($servername, $username, $password, $dbname);
+
+    // Check connection
+    if ($connection->connect_error) {
+        die("Connection failed: " . $connection->connect_error);
+    }
 
     // Query mechanist
     $sql_mechanist = "SELECT * FROM mechanist_tbl";
     $result_mechanist = $connection->query($sql_mechanist);
     $mechanist = [];
-    if($result_mechanist->num_rows > 0) {
-        while($row_result_mechanist = $result_mechanist->fetch_assoc()) {
+    if ($result_mechanist->num_rows > 0) {
+        while ($row_result_mechanist = $result_mechanist->fetch_assoc()) {
             $mechanist[] = $row_result_mechanist;
         }
     }
 
     // Query registered services
-    $sql_services = "SELECT DISTINCT * from services_tbl";
+    $sql_services = "SELECT DISTINCT * FROM services_tbl";
     $result_services = $connection->query($sql_services);
     $services = [];
-    if($result_services->num_rows > 0) {
-        while($row_result_services = $result_services->fetch_assoc()) {
+    if ($result_services->num_rows > 0) {
+        while ($row_result_services = $result_services->fetch_assoc()) {
             $services[] = $row_result_services;
         }
     }
 
     // Query to fetch customers and their registered vehicles
-    $sql = "
-        SELECT c.id AS customer_id, c.c_firstname, c.c_lastname, c.phone, c.email, c.address,
-               v.license_plate, v.vehicle_model, v.id AS vehicle_id
-        FROM customers_tbl c
-        INNER JOIN c_vehicles_registration_tbl v ON c.id = v.customer_id
-        LIMIT 10
-    ";
-    $result = $connection->query($sql);
-    $customers = [];
-    if ($result->num_rows > 0) {
-        while($row = $result->fetch_assoc()) {
-            $customers[$row['customer_id']]['customer_info'] = [
-                'c_firstname' => $row['c_firstname'],
-                'c_lastname' => $row['c_lastname'],
-                'phone' => $row['phone'],
-                'email' => $row['email'],
-                'address' => $row['address']
-            ];
-            $customers[$row['customer_id']]['vehicles'][] = [
-                'license_plate' => $row['license_plate'],
-                'vehicle_model' => $row['vehicle_model'],
-                'vehicle_id' => $row['vehicle_id']
-            ];
+    if (isset($_SESSION['id'])) {
+        $customer_id = $_SESSION['id'];
+        $sql = "
+            SELECT c.id AS customer_id, c.c_firstname, c.c_lastname, c.phone, c.email, c.address,
+                   v.license_plate, v.vehicle_model, v.id AS vehicle_id
+            FROM customers_tbl c
+            INNER JOIN c_vehicles_registration_tbl v ON c.id = v.customer_id
+            WHERE c.id = ?
+        ";
+
+        // Prepare and bind parameters to avoid SQL injection
+        if ($stmt = $connection->prepare($sql)) {
+            $stmt->bind_param("i", $customer_id);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            $customers = [];
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $customers[$row['customer_id']]['customer_info'] = [
+                        'c_firstname' => $row['c_firstname'],
+                        'c_lastname' => $row['c_lastname'],
+                        'phone' => $row['phone'],
+                        'email' => $row['email'],
+                        'address' => $row['address']
+                    ];
+                    $customers[$row['customer_id']]['vehicles'][] = [
+                        'license_plate' => $row['license_plate'],
+                        'vehicle_model' => $row['vehicle_model'],
+                        'vehicle_id' => $row['vehicle_id']
+                    ];
+                }
+            }
+            $stmt->close();
+        } else {
+            echo "Error preparing the statement: " . $connection->error;
         }
+    } else {
+        echo "Customer ID not found in session.";
     }
+
     $connection->close();
 ?>
+<body>
 
-  <!-- Main-->
-  <main id="main" class="main">
+<!-- Main-->
+<main id="main" class="main">
 
 <div class="pagetitle">
     <h1>Services Management</h1>
@@ -81,11 +101,9 @@
                     <form class="row g-3" action="process_code/services_schedule_registration.php" method="POST">
 
                         <!-- Customer Information -->
-
-
                         <div class="col-md-6">
-
-                            <input type="text" class="form-control" id="customer_name" name="customer_name" value="<?php  echo $_SESSION['id']; ?>" >
+                            <label for="customer_name" class="form-label">Customer ID</label>
+                            <input type="text" class="form-control" id="customer_name" name="customer_name" value="<?php echo htmlspecialchars($_SESSION['id']); ?>" readonly>
                         </div>
 
                         <!-- Vehicle Information -->
@@ -184,27 +202,25 @@
 </section>
 </main><!-- End #main -->
 
-  <!-- End #main -->
-
-  <!-- ======= Footer ======= -->
-  <?php
+<!-- ======= Footer ======= -->
+<?php
     include("user_footer.php");
 ?>
 
 <script>
     var customers = <?php echo json_encode($customers); ?>;
 
+    document.addEventListener('DOMContentLoaded', function() {
+        updateCustomerInfo();
+    });
+
     function updateCustomerInfo() {
         var customerId = document.getElementById('customer_name').value;
         if (customerId) {
             var customer = customers[customerId].customer_info;
-            document.getElementById('phone').value = customer.phone;
-            document.getElementById('email').value = customer.email;
-            document.getElementById('address').value = customer.address;
-            document.getElementById('customer_id').value = customerId;
+            var vehicles = customers[customerId].vehicles;
 
             // Populate license plate dropdown
-            var vehicles = customers[customerId].vehicles;
             var licensePlateDropdown = document.getElementById('license_plate');
             licensePlateDropdown.innerHTML = '<option value="" selected>Select License Plate</option>';
             vehicles.forEach(function(vehicle) {
