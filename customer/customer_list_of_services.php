@@ -48,7 +48,7 @@ include("user_header.php");
                                     INNER JOIN
                                         mechanist_tbl t ON ss.mechanist_id = t.id
                                     WHERE
-                                        ss.customer_id = ?
+                                        ss.sched_service_id = ?
                                 ";
                                 $scheduleStmt = $connection->prepare($scheduleQuery);
                                 $scheduleStmt->bind_param('i', $customer_id);

@@ -46,11 +46,11 @@ include("admin_header.php");
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>
-                                            <th scope="col">Parts ID</th>
-                                            <th scope="col">Quantity Change</th>
-                                            <th scope="col">Timestamp</th>
+                                            <th scope="col">Parts Name</th>
+                                            <th scope="col">Quantity</th>
+                                            <th scope="col">Date</th>
                                             <th scope="col">User Id</th>
-                                            <th scope="col">Status</th>
+                                            <th scope="col">Delivery</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -60,7 +60,18 @@ include("admin_header.php");
                                         $end_date = isset($_GET['end_date']) ? $_GET['end_date'] : null;
 
                                         // Prepare the SQL statement with optional date filters
-                                        $sql = "SELECT * FROM inventory_logs WHERE 1";
+                                        $sql = "SELECT il.reorder_id, il.quantity_change, il.timestamp, il.user_id, il.status, rt.reorder_id, rt.parts_id, mt.m_id, mt.parts_name
+                                        
+                                        FROM inventory_logs  as il
+
+                                        INNER JOIN reorders_tbl as rt  ON il.reorder_id = rt.reorder_id
+                                        INNER JOIN motorparts_tbl as mt ON rt.parts_id = mt.m_id
+                                        
+
+                                  
+                                         
+                                         
+                                         WHERE 1";
                                         if ($start_date && $end_date) {
                                             $sql .= " AND timestamp BETWEEN '$start_date' AND '$end_date'";
                                         } elseif ($start_date) {
@@ -76,7 +87,7 @@ include("admin_header.php");
                                         while ($row = $result->fetch_assoc()) {
                                             echo "<tr>";
                                             echo "<td>" . $count . "</td>";
-                                            echo "<td>" . $row['reorder_id'] . "</td>";
+                                            echo "<td>" . $row['parts_name'] . "</td>";
                                             echo "<td>" . $row['quantity_change'] . "</td>";
                                             echo "<td>" . $row['timestamp'] . "</td>";
                                             echo "<td>" . $row['user_id'] . "</td>";

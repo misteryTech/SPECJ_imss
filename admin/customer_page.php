@@ -29,12 +29,20 @@
 
                             <!-- Multi Columns Form -->
                             <form class="row g-3" action="process_code/customer_registration.php" method="POST">
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <label for="firstname" class="form-label">Firstname</label>
                                     <input type="text" class="form-control" id="firstname" name="firstname" required>
                                 </div>
 
-                                <div class="col-md-6">
+
+                                <div class="col-md-4">
+                                    <label for="middlename" class="form-label">Middlename</label>
+                                    <input type="text" class="form-control" id="middlename" name="middlename" required>
+                                </div>
+
+
+
+                                <div class="col-md-4">
                                     <label for="lastname" class="form-label">Lastname</label>
                                     <input type="text" class="form-control" id="lastname" name="lastname" required>
                                 </div>
@@ -96,7 +104,7 @@
                                         while($row = $result->fetch_assoc()) {
                                             echo "<tr>";
                                             echo "<td>".$count."</td>";
-                                            echo "<td>".$row['c_firstname'].' '.$row['c_lastname']."</td>";
+                                            echo "<td>".$row['c_firstname'].' '.substr($row['c_middlename'], 0, 1).'. '.$row['c_lastname']."</td>";
                                             echo "<td>".$row['phone']."</td>";
                                             echo "<td>".$row['address']."</td>";
                                             echo "<td>";
@@ -124,6 +132,14 @@
                                             echo "<label for='editFirstname" . $row['id'] . "'>Firstname</label>";
                                             echo "<input type='text' class='form-control' id='editFirstname" . $row['id'] . "' name='edit_firstname' value='" . $row['c_firstname'] . "' required>";
                                             echo "</div>";
+
+
+                                            echo "<div class='form-group'>";
+                                            echo "<label for='editMiddlename" . $row['id'] . "'>Middlename</label>";
+                                            echo "<input type='text' class='form-control' id='editMiddlename" . $row['id'] . "' name='edit_middlename' value='" . $row['c_middlename'] . "' required>";
+                                            echo "</div>";
+
+
 
                                             echo "<div class='form-group'>";
                                             echo "<label for='editLastname" . $row['id'] . "'>Lastname</label>";

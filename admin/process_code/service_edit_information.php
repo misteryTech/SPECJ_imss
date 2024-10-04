@@ -8,12 +8,13 @@
         $services_type_edit = $_POST["editServiceType"];
         $services_name = $_POST["edit_service_name"];
         $service_price = $_POST["edit_price"];
+        $edit_description = $_POST["edit_description"];
 
 
-        $stmt = $connection->prepare("UPDATE services_tbl SET services_type=?, services_name=?, price=?
+        $stmt = $connection->prepare("UPDATE services_tbl SET services_type=?, services_name=?, price=?, description=?
          WHERE id=?");
 
-        $stmt->bind_param("sssi",  $services_type_edit, $services_name,$service_price,$service_edit_id);
+        $stmt->bind_param("ssssi",  $services_type_edit, $services_name,$service_price,$edit_description,$service_edit_id);
 
         if($stmt->execute()){
                 echo "<script>alert('Updated Successfully');</script>";

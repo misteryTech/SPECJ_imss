@@ -102,8 +102,8 @@
 
                         <!-- Customer Information -->
                         <div class="col-md-6">
-                            <label for="customer_name" class="form-label">Customer ID</label>
-                            <input type="text" class="form-control" id="customer_name" name="customer_name" value="<?php echo htmlspecialchars($_SESSION['id']); ?>" readonly>
+                          
+                            <input type="hidden" class="form-control" id="customer_name" name="customer_name" value="<?php echo htmlspecialchars($_SESSION['id']); ?>" readonly>
                         </div>
 
                         <!-- Vehicle Information -->
@@ -123,8 +123,8 @@
                             <input type="text" class="form-control" id="vehicle_model" name="vehicle_model" readonly>
                         </div>
                         <div class="col-md-6">
-                            <label for="vehicle_id" class="form-label">Vehicle ID</label>
-                            <input type="text" class="form-control" id="vehicle_id" name="vehicle_id" readonly>
+                     
+                            <input type="hidden" class="form-control" id="vehicle_id" name="vehicle_id" readonly>
                         </div>
 
                         <!-- Service Details -->

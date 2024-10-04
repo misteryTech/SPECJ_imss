@@ -52,20 +52,17 @@
             <div class="col-12">
             <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Carousel with fade transition</h5>
-              <p>Add <code>.carousel-fade</code> to your carousel to animate slides with a fade transition instead of a slide.</p>
-
               <!-- Slides with fade transition -->
               <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
                 <div class="carousel-inner">
                   <div class="carousel-item active">
-                    <img src="../assets/img/slides-1.jpg" class="d-block w-100" alt="...">
+                    <img src="../assets_front/img/shop.jpg" class="d-block w-100" alt="...">
                   </div>
                   <div class="carousel-item">
-                    <img src="../assets/img/slides-2.jpg" class="d-block w-100" alt="...">
+                    <img src="../assets_front/img/shop1.jpg" class="d-block w-100" alt="...">
                   </div>
                   <div class="carousel-item">
-                    <img src="../assets/img/slides-3.jpg" class="d-block w-100" alt="...">
+                    <img src="../assets_front/img/shop2.jpg" class="d-block w-100" alt="...">
                   </div>
                 </div>
 

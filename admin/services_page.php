@@ -46,7 +46,13 @@
                                 <div class="col-md-4">
                                     <label for="price" class="form-label">Price</label>
                                     <input type="number" class="form-control" id="price" name="price">
+                                    </div>
+                                <div class="col-md-12">
+                                <label for="description" class="form-label">Desciption</label>
+                                <textarea name="description" class="form-control" id=""></textarea>
                                 </div>
+
+
                                 <div class="text-center">
                                     <button type="submit" class="btn btn-primary">Submit</button>
                                     <button type="reset" class="btn btn-secondary">Reset</button>
@@ -132,6 +138,11 @@
                                             echo "<input type='number' class='form-control' id='editPrice" . $row['id'] . "' name='edit_price' value='" . $row['price'] . "' required>";
                                             echo "</div>";
 
+
+                                            echo "<div class='form-group'>";
+                                            echo "<label for='editDescription" . $row['id'] . "'>Description</label>";
+                                            echo "<input type='text' class='form-control' id='editDescription" . $row['id'] . "' name='edit_description' value='" . $row['description'] . "' required>";
+                                            echo "</div>";
 
 
 

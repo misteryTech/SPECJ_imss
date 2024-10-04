@@ -6,13 +6,14 @@
         $services_type = $_POST["services_type"];
         $services_name = $_POST["services_name"];
         $services_price = $_POST["price"];
+        $description = $_POST["description"];
 
 
 
-        $stmt = $connection->prepare("INSERT INTO services_tbl(services_type,services_name,price)
-                VALUES (?,?,?)");
+        $stmt = $connection->prepare("INSERT INTO services_tbl(services_type,services_name,price,description)
+                VALUES (?,?,?,?)");
 
-        $stmt->bind_param("sss",$services_type,$services_name,$services_price);
+        $stmt->bind_param("ssss",$services_type,$services_name,$services_price,$description);
 
 
         if($stmt->execute()){

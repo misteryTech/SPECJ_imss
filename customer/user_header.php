@@ -85,8 +85,11 @@
 
         session_start();
 
+
+        $user_id = $_SESSION['id'];
         if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
             header("location: ../login.php");
             exit();
         }
+
     ?>

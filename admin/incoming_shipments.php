@@ -89,6 +89,7 @@
                                                 echo "<div class='modal-body'>";
 
                                                 echo "<form action='process_code/update_incoming_shipment.php' method='POST'>";
+                                                
                                                 echo "<input type='hidden' name='reorder_id' value='" . $row['reorder_id'] . "'>";
 
                                                 echo "<div class='form-group'>";

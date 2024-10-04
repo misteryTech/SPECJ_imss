@@ -37,7 +37,7 @@
                     exit();
         }else{
             echo "<script>alert('Invalid Username or Password')</script>";
-            echo "<script>window.location.href='../login.php'</script>";
+            echo "<script>window.location.href='../customer_login.php'</script>";
                 }
 
             $stmt->close();
