@@ -32,6 +32,7 @@
                     $_SESSION['lastname'] = $lastname;
                     $_SESSION['email'] = $email;
                     $_SESSION['username'] = $username;
+                    $_SESSION['password'] = $username;
 
                     header("location: ../admin/admin_dashboard.php");
                     exit();

@@ -245,7 +245,9 @@
                                        echo '<span class="badge bg-danger p-2" style="font-size: 1rem;">Request</span>';
                                    } elseif ($row['status'] == 'Accept') {
                                        echo '<span class="badge bg-success p-2" style="font-size: 1rem;">Accept</span>';
-                                   } else {
+                                   } elseif ($row['status'] == 'Decline') {
+                                    echo '<span class="badge bg-danger p-2" style="font-size: 1rem;">Reject</span>';
+                                }else {
                                        echo '<span class="badge p-2" style="font-size: 1.2rem;">' . htmlspecialchars($row['status']) . '</span>';
                                    }
                                ?></td>
