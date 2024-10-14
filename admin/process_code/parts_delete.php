@@ -5,9 +5,10 @@
 
     if($_SERVER["REQUEST_METHOD"] === "POST"){
 
-            $parts_id = $_POST["parts_id"];
+            $m_id = $_POST["m_id"];
+
             $stmt = $connection->prepare("DELETE FROM motorparts_tbl WHERE m_id=?");
-            $stmt->bind_param("i",$parts_id);
+            $stmt->bind_param("i",$m_id);
 
             $stmt->execute();
 

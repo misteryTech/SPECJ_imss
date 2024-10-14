@@ -110,7 +110,7 @@ include("user_sidenav.php");
           <!-- Status -->
           <div class="row mb-3">
             <div class="col-md-12">
-              <p><strong>Status:</strong> <span id="status" class="badge bg-danger data-font"></span></p>
+              <p><strong>Status:</strong> <span id="status" class="badge bg-success data-font"></span></p>
             </div>
           </div>
         </div>

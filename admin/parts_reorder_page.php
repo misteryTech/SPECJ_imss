@@ -49,7 +49,11 @@
                         </thead>
                         <tbody>
                             <?php
-                                $stmt = $connection->prepare("SELECT * FROM motorparts_tbl WHERE QuantityInStock <= 5 AND QuantityInStock > 0");
+                                $stmt = $connection->prepare("SELECT MT.*, ST.id, ST.supplierName
+
+FROM motorparts_tbl AS MT
+INNER JOIN suppliers_tbl AS ST ON ST.id = MT.supplier
+WHERE MT.QuantityInStock <= 5 AND MT.QuantityInStock > 0");
                                 $stmt->execute();
                                 $result = $stmt->get_result();
                                 $count = 1;
@@ -61,7 +65,7 @@
                                     echo "<td>".$row['parts_number']."</td>";
                                     echo "<td>".$row['price']."</td>";
                                     echo "<td>".$row['QuantityInStock']."</td>";
-                                    echo "<td>".$row['supplier']."</td>";
+                                    echo "<td>".$row['supplierName']."</td>";
                                     echo "<td>";
                                     echo "<button class='btn btn-primary' data-toggle='modal' data-target='#reorderModal" . $row['m_id'] . "'>Reorder</button>";
                                     echo "</td>";
@@ -102,7 +106,7 @@
 
                                     echo "<div class='form-group'>";
                                     echo "<label for='reorder_supplier" . $row['m_id'] . "'>Supplier</label>";
-                                    echo "<input type='text' class='form-control' id='reorder_supplier" . $row['m_id'] . "' name='supplier' value='" . $row['supplier'] . "' readonly>";
+                                    echo "<input type='text' class='form-control' id='reorder_supplier" . $row['m_id'] . "' name='supplier' value='" . $row['supplierName'] . "' readonly>";
                                     echo "</div>";
 
                                     echo "<div class='form-group'>";

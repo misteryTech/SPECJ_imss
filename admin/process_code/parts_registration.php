@@ -35,7 +35,7 @@
         }
 
         // Check file size
-        if ($_FILES["parts_image"]["size"] > 500000) {
+        if ($_FILES["parts_image"]["size"] > 500000000) {
             echo "<script>alert('Sorry, your file is too large.');</script>";
             $uploadOk = 0;
         }
@@ -43,6 +43,7 @@
         // Allow certain file formats
         if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif") {
             echo "<script>alert('Sorry, only JPG, JPEG, PNG & GIF files are allowed.');</script>";
+            echo "<script>window.location.href='../parts_page.php';</script>";
             $uploadOk = 0;
         }
 

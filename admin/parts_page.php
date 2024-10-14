@@ -132,7 +132,7 @@
                                     <div class="col-md-4">
                                     <label for="customer_name" class="form-label">Supplier</label>
                                     <select name="supplier" id="supplier" class="form-select" onchange="updateCustomerInfo()">
-                                        <option value="" selected>Select Customer</option>
+                                        <option value="" selected>Select Supplier</option>
                                         <?php foreach ($suppliers as $supplier) : ?>
                                             <option value="<?php echo htmlspecialchars($supplier['id']); ?>">
                                                 <?php echo htmlspecialchars($supplier['supplierName']); ?>
@@ -312,8 +312,18 @@
                                             echo "<p>Are you sure you want to delete this service?</p>";
                                             echo "</div>";
                                             echo "<div class='modal-footer'>";
-                                            echo "<button type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button>";
-                                            echo "<a href='process_code/delete_parts.php?m_id=" . $row['m_id'] . "' class='btn btn-danger'>Delete</a>";
+
+
+                                       
+                                            
+                                            echo "<form action='process_code/parts_delete.php' method='POST' style='display:inline;'>";
+                                            echo "<input type='hidden' name='m_id' value='" . $row['m_id'] . "'>";
+                                            echo "<button type='submit' class='btn btn-danger'>Delete</button>";
+                                            echo "<button type='button' class='btn btn-secondary' data-dismiss='modal'>Cancel</button>";
+                                            echo "</form>";
+
+
+
                                             echo "</div>";
                                             echo "</div>";
                                             echo "</div>";
@@ -350,6 +360,10 @@
         function resetImagePreview() {
             document.getElementById('image_preview').src = "";
         }
+
+        $(document).ready(function() {
+            $('#parts_datatable').DataTable();
+        });
     </script>
 
 </body>

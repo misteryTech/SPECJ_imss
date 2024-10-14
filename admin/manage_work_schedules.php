@@ -9,7 +9,7 @@ $request_count = $request_count_result->fetch_assoc()['count'];
 
 
 // Fetch counts for each category
-$working_count_query = $connection->prepare("SELECT COUNT(*) as count FROM scheduling_services_tbl WHERE status='Working'");
+$working_count_query = $connection->prepare("SELECT COUNT(*) as count FROM scheduling_services_tbl WHERE status='Accept'");
 $working_count_query->execute();
 $working_count_result = $working_count_query->get_result();
 $working_count = $working_count_result->fetch_assoc()['count'];
@@ -73,6 +73,9 @@ include("admin_sidenav.php");
                   Mechanist Reject <span class="badge bg-white text-primary"><?php echo $reject_count; ?></span>
                   </button>
                 </li>
+
+
+
 
 
 
@@ -174,7 +177,7 @@ include("admin_sidenav.php");
                                          INNER JOIN
                                              mechanist_tbl m ON ss.mechanist_id = m.id
                                          WHERE
-                                             ss.status = 'Working'
+                                             ss.status = 'Accept'
                                      ";
 
                                      // Prepare the statement
@@ -194,8 +197,9 @@ include("admin_sidenav.php");
                                          echo "<td>" . $row['sched_service_id'] . "</td>";
                                          echo "<td>" . $row['services_name'] . "</td>";
                                          echo "<td>" . $row['mechanist_name'] . "</td>";
-                                         echo "</tr>";
 
+
+                                         echo "</tr>";
                                          $count++;
                                      }
 

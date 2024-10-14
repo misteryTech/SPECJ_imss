@@ -13,16 +13,15 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
     $preferred_time = $_POST["preferred_time"];
     $select_mechanist = $_POST["select_mechanist"];
     $technician_notes = $_POST["technician_notes"];
-    $customer_comments = $_POST["customer_comments"];
-    $special_instructions = $_POST["special_instructions"];
+
     $status = "Request";
 
     // Prepare an SQL statement to insert data into the database
     $stmt = $connection->prepare("INSERT INTO scheduling_services_tbl
             (customer_id, vehicle_id, services_id, mechanist_id, service_description,
-            service_date, preferred_time, technician_notes, customer_comments,
-            special_instruction, status)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            service_date, preferred_time, technician_notes
+            , status)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
     if($stmt === false) {
         echo "<script>alert('Failed to prepare statement');</script>";
@@ -32,7 +31,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
     // Bind parameters to the prepared statement
     // Adjust the parameter types accordingly (i.e., i for integer, s for string, d for double)
     $stmt->bind_param("iiissssssss", $customer_name, $vehicle_id, $services_name, $select_mechanist,
-    $service_description, $service_date, $preferred_time, $technician_notes, $customer_comments, $special_instructions, $status);
+    $service_description, $service_date, $preferred_time, $technician_notes, $status);
 
     // Execute the prepared statement
     if($stmt->execute()){

@@ -141,12 +141,6 @@
       </li>
 
 
-      <li>
-        <a href="customer_vehicle_registration.php">
-          <i class="bi bi-circle"></i><span>Registered Vehicle</span>
-        </a>
-      </li>
-
 
       <li>
         <a href="customer_service_history.php">
@@ -190,12 +184,6 @@
 
   <li class="nav-heading">Pages</li>
 
-  <li class="nav-item">
-    <a class="nav-link collapsed" href="users-profile.html">
-      <i class="bi bi-person"></i>
-      <span>Customer</span>
-    </a>
-  </li><!-- End Profile Page Nav -->
 
   <li class="nav-item">
     <a class="nav-link collapsed" href="mechanist_page.php">

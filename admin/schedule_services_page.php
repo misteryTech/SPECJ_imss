@@ -183,18 +183,7 @@
                         </div>
 
                         <!-- Comments/Notes -->
-                        <div class="col-12">
-                            <h6>Comments/Notes</h6>
-                            <hr>
-                        </div>
-                        <div class="col-md-12">
-                            <label for="customer_comments" class="form-label">Customer Comments</label>
-                            <textarea class="form-control" id="customer_comments" name="customer_comments"></textarea>
-                        </div>
-                        <div class="col-md-12">
-                            <label for="special_instructions" class="form-label">Special Instructions</label>
-                            <textarea class="form-control" id="special_instructions" name="special_instructions"></textarea>
-                        </div>
+                     
 
                         <div class="text-center">
                             <button type="submit" class="btn btn-primary">Submit</button>

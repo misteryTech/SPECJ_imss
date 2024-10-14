@@ -19,6 +19,9 @@ $reject_count_query->execute();
 $reject_count_result = $reject_count_query->get_result();
 $reject_count = $reject_count_result->fetch_assoc()['count'];
 $reject_count_query->close();
+
+
+
 ?>
 
 <body>

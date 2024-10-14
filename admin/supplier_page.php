@@ -32,7 +32,7 @@
                             <!-- Multi Columns Form -->
                             <form class="row g-3" action="process_code/supplier_registration.php" method="POST">
                                 <div class="col-md-6">
-                                    <label for="supplierName" class="form-label">Supplier Name</label>
+                                    <label for="supplierName" class="form-label">Company Name</label>
                                     <input type="text" class="form-control" id="supplierName" name="supplierName" required>
                                 </div>
                                 <div class="col-md-6">
@@ -81,7 +81,7 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">Supplier Name</th>
+                                        <th scope="col">Company Name</th>
                                         <th scope="col">Contact Person</th>
                                         <th scope="col">Phone No.</th>
                                         <th scope="col">Address</th>

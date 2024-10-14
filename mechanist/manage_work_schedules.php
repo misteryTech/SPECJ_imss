@@ -13,7 +13,7 @@ $request_count_result = $request_count_query->get_result();
 $request_count = $request_count_result->fetch_assoc()['count'];
 
 // Query to fetch count of Working services
-$working_count_query = $connection->prepare("SELECT COUNT(*) as count FROM scheduling_services_tbl WHERE status='Working' AND mechanist_id = ?");
+$working_count_query = $connection->prepare("SELECT COUNT(*) as count FROM scheduling_services_tbl WHERE status='Accept' AND mechanist_id = ?");
 $working_count_query->bind_param('i', $mechanic_id);
 $working_count_query->execute();
 $working_count_result = $working_count_query->get_result();
@@ -25,6 +25,15 @@ $reject_count_query->bind_param('i', $mechanic_id);
 $reject_count_query->execute();
 $reject_count_result = $reject_count_query->get_result();
 $reject_count = $reject_count_result->fetch_assoc()['count'];
+
+
+
+// Query to fetch count of Reject services
+$completed_count_query = $connection->prepare("SELECT COUNT(*) as count FROM scheduling_services_tbl WHERE status='Completed' AND mechanist_id = ?");
+$completed_count_query->bind_param('i', $mechanic_id);
+$completed_count_query->execute();
+$completed_count_result = $completed_count_query->get_result();
+$completed_count = $completed_count_result->fetch_assoc()['count'];
 ?>
 
 <!-- HTML Body -->
@@ -62,24 +71,98 @@ include("mech_sidenav.php");
                                     Request Services <span class="badge bg-white text-primary"><?php echo $request_count; ?></span>
                                 </button>
                             </li>
-                            <!-- Working Services Tab -->
-                            <li class="nav-item" role="presentation">
-                                <button class="btn btn-success" style="margin-left: 20px;" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">
-                                    Working <span class="badge bg-white text-primary"><?php echo $working_count; ?></span>
-                                </button>
-                            </li>
-                            <!-- Mechanist Reject Services Tab -->
+
                             <li class="nav-item" role="presentation">
                                 <button class="btn btn-danger" style="margin-left: 20px;" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">
                                     Mechanist Reject <span class="badge bg-white text-primary"><?php echo $reject_count; ?></span>
                                 </button>
                             </li>
+
+
+                            <!-- Working Services Tab -->
+                            <li class="nav-item" role="presentation">
+                                <button class="btn btn-warning" style="margin-left: 20px;" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">
+                                    Working <span class="badge bg-white text-primary"><?php echo $working_count; ?></span>
+                                </button>
+                            </li>
+                             <!-- Working Services Tab -->
+                            <li class="nav-item" role="presentation">
+                                <button class="btn btn-success" style="margin-left: 20px;" id="pills-completed-tab" data-bs-toggle="pill" data-bs-target="#pills-completed" type="button" role="tab" aria-controls="pills-completed" aria-selected="false">
+                                    Completed Task <span class="badge bg-white text-primary"><?php echo $completed_count; ?></span>
+                                </button>
+                            </li>
+
                         </ul>
 
                         <!-- Tab Content -->
                         <div class="tab-content pt-2" id="borderedTabContent">
+
+                        <div class="tab-pane fade show active" id="pills-completed" role="tabpanel" aria-labelledby="pills-completed-tab">
+                                <table class="table table-hover" id="completed_table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Schedule Id</th>
+                                            <th scope="col">Services Name</th>
+                                            <th scope="col">Mechanist Name</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        // Prepare the SQL query with INNER JOINs and mechanic_id filter
+                                        $query = "
+                                            SELECT
+                                                ss.sched_service_id,
+                                                ss.services_id,
+                                                s.services_name,
+                                                ss.mechanist_id,
+                                                CONCAT(m.m_firstname, ' ', m.m_lastname) AS mechanist_name,
+                                                ss.status
+                                            FROM
+                                                scheduling_services_tbl ss
+                                            INNER JOIN
+                                                services_tbl s ON ss.services_id = s.id
+                                            INNER JOIN
+                                                mechanist_tbl m ON ss.mechanist_id = m.id
+                                            WHERE
+                                                ss.status = 'Completed'
+                                                AND ss.mechanist_id = ?
+                                        ";
+
+                                        // Prepare the statement
+                                        $stmt = $connection->prepare($query);
+                                        $stmt->bind_param('i', $mechanic_id);
+
+                                        // Execute the query
+                                        $stmt->execute();
+
+                                        // Fetch the results
+                                        $result = $stmt->get_result();
+                                        $count = 1;
+
+                                        // Loop through the results and display the data in a table
+                                        while ($rows = $result->fetch_assoc()) {
+                                            echo "<tr>";
+                                            echo "<td>" . $count . "</td>";
+                                            echo "<td>" . $rows['sched_service_id'] . "</td>";
+                                            echo "<td>" . $rows['services_name'] . "</td>";
+                                            echo "<td>" . $rows['mechanist_name'] . "</td>";
+                                            echo "</tr>";
+
+                                            $count++;
+                                        }
+
+                                        // Close the statement
+                                        $stmt->close();
+                                        ?>
+                                    </tbody>
+                                </table>
+                            </div>
+
+
+
                             <!-- Request Services Table -->
-                            <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="home-tab">
+                            <div class="tab-pane fade" id="pills-home" role="tabpanel" aria-labelledby="home-tab">
                                 <table class="table table-hover" id="stock_datatable">
                                     <thead>
                                         <tr>
@@ -123,12 +206,12 @@ include("mech_sidenav.php");
                                         $count = 1;
 
                                         // Loop through the results and display the data in a table
-                                        while ($row = $result->fetch_assoc()) {
+                                        while ($rowss = $result->fetch_assoc()) {
                                             echo "<tr>";
                                             echo "<td>" . $count . "</td>";
-                                            echo "<td>" . $row['sched_service_id'] . "</td>";
-                                            echo "<td>" . $row['services_name'] . "</td>";
-                                            echo "<td>" . $row['mechanist_name'] . "</td>";
+                                            echo "<td>" . $rowss['sched_service_id'] . "</td>";
+                                            echo "<td>" . $rowss['services_name'] . "</td>";
+                                            echo "<td>" . $rowss['mechanist_name'] . "</td>";
                                             echo "</tr>";
 
                                             $count++;
@@ -149,6 +232,7 @@ include("mech_sidenav.php");
                                             <th scope="col">Schedule Id</th>
                                             <th scope="col">Services Name</th>
                                             <th scope="col">Mechanist Name</th>
+                                            <th scope="col">Release Item</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -169,7 +253,7 @@ include("mech_sidenav.php");
                                             INNER JOIN
                                                 mechanist_tbl m ON ss.mechanist_id = m.id
                                             WHERE
-                                                ss.status = 'Working'
+                                                ss.status = 'Accept'
                                                 AND ss.mechanist_id = ?
                                         ";
 
@@ -185,15 +269,21 @@ include("mech_sidenav.php");
                                         $count = 1;
 
                                         // Loop through the results and display the data in a table
-                                        while ($row = $result->fetch_assoc()) {
-                                            echo "<tr>";
-                                            echo "<td>" . $count . "</td>";
-                                            echo "<td>" . $row['sched_service_id'] . "</td>";
-                                            echo "<td>" . $row['services_name'] . "</td>";
-                                            echo "<td>" . $row['mechanist_name'] . "</td>";
-                                            echo "</tr>";
+                                      while ($rowsss = $result->fetch_assoc()) {
+    echo "<tr>";
+    echo "<td>" . $count . "</td>";
+    echo "<td>" . $rowsss['sched_service_id'] . "</td>";
+    echo "<td>" . $rowsss['services_name'] . "</td>";
+    echo "<td>" . $rowsss['mechanist_name'] . "</td>";
+    echo "<td>";
+    echo "<a class='btn btn-primary' href='release_parts_page.php?sched_id=" . $row['sched_service_id'] . "'>Release Item</a> ";
+    echo "</td>";
+    echo "</tr>";
 
-                                            $count++;
+    $count++;
+    ?>
+
+                                            <?php
                                         }
 
                                         // Close the statement
@@ -247,12 +337,12 @@ include("mech_sidenav.php");
                                         $count = 1;
 
                                         // Loop through the results and display the data in a table
-                                        while ($row = $result->fetch_assoc()) {
+                                        while ($rowssss = $result->fetch_assoc()) {
                                             echo "<tr>";
                                             echo "<td>" . $count . "</td>";
-                                            echo "<td>" . $row['sched_service_id'] . "</td>";
-                                            echo "<td>" . $row['services_name'] . "</td>";
-                                            echo "<td>" . $row['mechanist_name'] . "</td>";
+                                            echo "<td>" . $rowssss['sched_service_id'] . "</td>";
+                                            echo "<td>" . $rowssss['services_name'] . "</td>";
+                                            echo "<td>" . $rowssss['mechanist_name'] . "</td>";
                                             echo "</tr>";
 
                                             $count++;
@@ -277,7 +367,10 @@ include("mech_sidenav.php");
 
 <!-- DataTables initialization -->
 <script>
-    $(document).ready(function() {
-        $('#stock_datatable, #reorder_datatable, #outofstock_datatable').DataTable();
-    });
+$(document).ready(function() {
+    $('#stock_datatable, #reorder_datatable, #outofstock_datatable , #completed_table').DataTable();
+});
+
+
+
 </script>

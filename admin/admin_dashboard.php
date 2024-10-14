@@ -88,7 +88,7 @@
 
         <!-- Left side columns -->
         <div class="col-lg-8">
-          <div class="row">
+     <div class="row">
 
             <!-- Sales Card -->
             <div class="col-xxl-4 col-md-6">
@@ -105,7 +105,7 @@
                     <li><a class="dropdown-item" href="#">This Year</a></li>
                   </ul>
                 </div>
-
+                <a href="http://localhost/SPECJ_imss/admin/services_calendar_schedule.php" >
                 <div class="card-body">
                   <h5 class="card-title">Scheduled Services </h5>
 
@@ -114,11 +114,11 @@
                       <i class="bi bi-calendar-check"></i>
                     </div>
                     <div class="ps-3">
-                    <h6><?php echo $totalScheduledServices; ?></h6>
+                   <h6><?php echo $totalScheduledServices; ?></h6>
                     </div>
                   </div>
                 </div>
-
+                </a> 
               </div>
             </div><!-- End Sales Card -->
 
@@ -126,7 +126,7 @@
             <!-- Customers Card -->
             <div class="col-xxl-4 col-md-6">
               <div class="card info-card customers-card">
-
+              <a href="http://localhost/SPECJ_imss/admin/customer_page.php" >
                 <div class="card-body">
                 <h5 class="card-title">Total Customers</h5>
 
@@ -140,6 +140,8 @@
                   </div>
                 </div>
               </div>
+
+                  </a>
             </div><!-- End Customers Card -->
 
 
@@ -158,7 +160,7 @@
                     <li><a class="dropdown-item" href="#">This Year</a></li>
                   </ul>
                 </div>
-
+                <a href="http://localhost/SPECJ_imss/admin/services_page.php" >
                 <div class="card-body">
                 <h5 class="card-title">Total Services</h5>
                   <div class="d-flex align-items-center">
@@ -171,7 +173,7 @@
                     </div>
                   </div>
                 </div>
-
+                </a>
               </div>
             </div><!-- End Revenue Card -->
 
@@ -179,7 +181,7 @@
             <!-- Additional Customers Card -->
             <div class="col-xxl-4 col-md-6">
               <div class="card info-card out-of-stock-card">
-
+              <a href="http://localhost/SPECJ_imss/admin/view_stock_level.php" >
                 <div class="card-body">
                   <h5 class="card-title">Out of Stock </h5>
 
@@ -194,7 +196,7 @@
                 </div>
               </div>
             </div><!-- End Additional Customers Card -->
-
+</a>
           </div>
         </div><!-- End Left side columns -->
 
@@ -225,7 +227,7 @@
                 <thead>
                   <tr>
 
-                        <th scope="col">Service ID</th>
+                 
                         <th scope="col">Customer Name</th>
                         <th scope="col">Service Date</th>
                         <th scope="col">Service Type</th>
@@ -237,17 +239,19 @@
                         <?php while ($row = $result->fetch_assoc()): ?>
                           <tr>
 
-                            <td><?php echo htmlspecialchars($row['sched_service_id']); ?></td>
+
                             <td><?php echo htmlspecialchars($row['c_firstname'].''.$row['c_lastname']); ?></td>
                             <td><?php echo htmlspecialchars($row['service_date']); ?></td>
                             <td><?php echo htmlspecialchars($row['services_name']); ?></td>
                             <td><?php if ($row['status'] == 'Request') {
                                        echo '<span class="badge bg-danger p-2" style="font-size: 1rem;">Request</span>';
                                    } elseif ($row['status'] == 'Accept') {
-                                       echo '<span class="badge bg-success p-2" style="font-size: 1rem;">Accept</span>';
+                                       echo '<span class="badge bg-warning p-2" style="font-size: 1rem;">Accept</span>';
                                    } elseif ($row['status'] == 'Decline') {
                                     echo '<span class="badge bg-danger p-2" style="font-size: 1rem;">Reject</span>';
-                                }else {
+                                }elseif ($row['status'] == 'Completed') {
+                                  echo '<span class="badge bg-success p-2" style="font-size: 1rem;">Completed</span>';
+                              }else {
                                        echo '<span class="badge p-2" style="font-size: 1.2rem;">' . htmlspecialchars($row['status']) . '</span>';
                                    }
                                ?></td>

@@ -31,7 +31,7 @@
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>
-                                            <th scope="col">Parts ID</th>
+                                            <th scope="col">Parts Name</th>
                                             <th scope="col">Quantity Order</th>
                                             <th scope="col">Price</th>
                                             <th scope="col">Re Order Date</th>
@@ -43,14 +43,21 @@
                                     </thead>
                                     <tbody>
                                         <?php
-                                            $stmt = $connection->prepare("SELECT * FROM reorders_tbl WHERE status='Delivered'");
+                                            $stmt = $connection->prepare("SELECT RT.*
+
+                                             
+                                            FROM reorders_tbl AS RT
+
+                                            INNER JOIN motorparts_tbl as MT ON MT.m_id = RT.parts_id
+
+                                             WHERE RT.status='Delivered'");
                                             $stmt->execute();
                                             $result = $stmt->get_result();
                                             $count = 1;
                                             while ($row = $result->fetch_assoc()) {
                                                 echo "<tr>";
                                                 echo "<td>" . $count . "</td>";
-                                                echo "<td>" . $row['parts_id'] . "</td>";
+                                                echo "<td>" . $row['parts_name'] . "</td>";
                                                 echo "<td>" . $row['quantity_to_reorder'] . "</td>";
                                                 echo "<td>" . $row['price'] . "</td>";
                                                 echo "<td>" . $row['reorder_date'] . "</td>";
