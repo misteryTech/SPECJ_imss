@@ -65,6 +65,7 @@ include("user_header.php");
                                     echo "<th>Service Date</th>";
                                     echo "<th>Status</th>";
                                     echo "<th>Technician Name</th>";
+                                    echo "<th>Released Item</th>";
                                     echo "</tr>";
                                     echo "</thead>";
                                     echo "<tbody>";
@@ -76,6 +77,9 @@ include("user_header.php");
                                         echo "<td>" . htmlspecialchars($scheduleRow['service_date']) . "</td>";
                                         echo "<td>" . htmlspecialchars($scheduleRow['status']) . "</td>";
                                         echo "<td>" . htmlspecialchars($scheduleRow['mechanist_name']) . "</td>";
+                                        echo "<td>";// Button to release the item
+                                        echo " <a class='btn btn-success' href='release_item.php?sched_service_id=" . htmlspecialchars($scheduleRow['sched_service_id']) . "'>Release Item</a>";
+                                        echo "</td>";
                                         echo "</tr>";
                                     }
                                     echo "</tbody>";

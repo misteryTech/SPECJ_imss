@@ -1,6 +1,6 @@
 <?php
     include("admin_header.php");
-    include("connection.php");
+    
 ?>
 <body>
 

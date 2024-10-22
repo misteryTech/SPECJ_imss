@@ -43,7 +43,7 @@
                                     </thead>
                                     <tbody>
                                         <?php
-                                            $stmt = $connection->prepare("SELECT RT.*
+                                            $stmt = $connection->prepare("SELECT RT.*, MT.parts_name
 
                                              
                                             FROM reorders_tbl AS RT

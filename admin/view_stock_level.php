@@ -1,6 +1,10 @@
 <?php
 include("admin_header.php");
 
+$timestamp = time();
+$currentDate = gmdate('Y-m-d', $timestamp);
+
+
 // Fetch counts for each category
 $instock_count_query = $connection->prepare("SELECT COUNT(*) as count FROM motorparts_tbl WHERE QuantityInStock > 5");
 $instock_count_query->execute();
@@ -16,6 +20,14 @@ $outofstock_count_query = $connection->prepare("SELECT COUNT(*) as count FROM mo
 $outofstock_count_query->execute();
 $outofstock_count_result = $outofstock_count_query->get_result();
 $outofstock_count = $outofstock_count_result->fetch_assoc()['count'];
+
+
+$expired_count = $connection->prepare("SELECT COUNT(*) as count FROM motorparts_tbl WHERE date_expired = '$currentDate' ");
+$expired_count->execute();
+$expiredcountresulty = $expired_count->get_result();
+$expired_count = $expiredcountresulty->fetch_assoc()['count'];
+
+
 ?>
 
 <body>
@@ -84,6 +96,11 @@ include("admin_sidenav.php");
                   </button>
                 </li>
 
+                <li class="nav-item" role="presentation">
+                  <button class="btn btn-warning" style="margin-left: 20px;" id="pills-expired-tab" data-bs-toggle="pill" data-bs-target="#pills-expired" type="button" role="tab" aria-controls="pills-expired" aria-selected="false">
+                  Expired Item <span class="badge bg-white text-primary"><?php echo $expired_count; ?></span>
+                  </button>
+                </li>
 
 
                         </ul>
@@ -194,6 +211,44 @@ include("admin_sidenav.php");
                             </div>
                         </div><!-- End Bordered Tabs -->
 
+
+                        <div class="tab-pane fade" id="pills-expired" role="tabpanel" aria-labelledby="expired-tab">
+
+<table class="table table-hover" id="expired_table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Parts Name</th>
+                <th scope="col">Price</th>
+                <th scope="col">Stock</th>
+                <th scope="col">Expired Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            $stmt = $connection->prepare("SELECT * FROM motorparts_tbl WHERE date_expired = '$currentDate' ");
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $count = 1;
+
+            while ($row = $result->fetch_assoc()) {
+                echo "<tr>";
+                  echo "<td>" . $count . "</td>";
+                echo "<td>" . $row['parts_name'] . "</td>";
+                echo "<td>" . $row['price'] . "</td>";
+                echo "<td>" . $row['QuantityInStock'] . "</td>";
+                echo "<td>" . $row['date_expired'] . "</td>";
+                echo "</tr>";
+
+                $count++;
+            }
+            ?>
+        </tbody>
+    </table><!-- End Table with hoverable rows -->
+</div>
+</div><!-- End Bordered Tabs -->
+
+
                     </div>
                 </div>
 
@@ -214,6 +269,7 @@ include("admin_footer.php");
         $('#stock_datatable').DataTable();
         $('#reorder_datatable').DataTable();
         $('#outofstock_datatable').DataTable();
+        $('#expired_table').DataTable();
 
         // Event listener for tab changes
         $('button[data-bs-toggle="tab"]').on('shown.bs.tab', function (e) {

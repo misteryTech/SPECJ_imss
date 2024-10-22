@@ -56,7 +56,7 @@
                                     <input type="text" class="form-control" id="parts_name" name="parts_name">
                                 </div>
 
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <label for="services_type" class="form-label">Services Type</label>
                                     <select name="services_type" id="services_type" class="form-select">
                                         <option selected>Select Type Of Vehicle</option>
@@ -65,9 +65,14 @@
                                     </select>
                                 </div>
 
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <label for="parts_number" class="form-label">Parts Number</label>
                                     <input type="text" class="form-control" id="parts_number" name="parts_number">
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label for="date_expired" class="form-label">Date Expired</label>
+                                    <input type="date" class="form-control" id="date_expired" name="date_expired" required> 
                                 </div>
 
                                 <div class="col-md-4">

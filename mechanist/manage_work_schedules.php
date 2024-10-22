@@ -97,7 +97,7 @@ include("mech_sidenav.php");
                         <!-- Tab Content -->
                         <div class="tab-content pt-2" id="borderedTabContent">
 
-                        <div class="tab-pane fade show active" id="pills-completed" role="tabpanel" aria-labelledby="pills-completed-tab">
+                        <div class="tab-pane fade show " id="pills-completed" role="tabpanel" aria-labelledby="pills-completed-tab">
                                 <table class="table table-hover" id="completed_table">
                                     <thead>
                                         <tr>

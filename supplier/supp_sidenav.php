@@ -8,7 +8,7 @@
       <span>Dashboard</span>
     </a>
   </li><!-- End Dashboard Nav -->
-
+<!-- 
 
 
   <li class="nav-item">
@@ -28,11 +28,39 @@
         </a>
       </li>
 
+      <li>
+        <a href="return_defective_page.php">
+          <i class="bi bi-circle"></i><span>Return Defective Item</span>
+        </a>
+      </li>
+
 
 
     </ul>
-  </li><!-- End Components Nav -->
+  </li>End Components Nav -->
 
+  <li class="nav-item">
+    <a class="nav-link " href="supplier_manage_orders.php">
+      <i class="bi bi-grid"></i>
+      <span>Manage Orders</span>
+    </a>
+  </li><!-- End Dashboard Nav -->
+
+
+  <li class="nav-item">
+    <a class="nav-link " href="delivery_scheduled_list.php">
+      <i class="bi bi-grid"></i>
+      <span>Delivery Schedules</span>
+    </a>
+  </li><!-- End Dashboard Nav -->
+
+
+  <li class="nav-item">
+    <a class="nav-link " href="return_defective_page.php">
+      <i class="bi bi-grid"></i>
+      <span>Return Defective Item</span>
+    </a>
+  </li><!-- End Dashboard Nav -->
 
 
 </ul>

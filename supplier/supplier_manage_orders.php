@@ -100,6 +100,7 @@ while ($row = $result->fetch_assoc()) {
 
     echo "<form action='process_code/supplier_manage_order.php' method='POST'>";
     echo "<input type='hidden' name='reorder_id' value='" . $row['reorder_id'] . "'>";
+    echo "<input type='hidden' name='supplier_id' value='" . $supplier_id . "'>";
 
     echo "<div class='form-group'>";
     echo "<label for='reorder_parts_name" . $row['reorder_id'] . "'>Part Name</label>";

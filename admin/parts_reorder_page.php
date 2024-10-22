@@ -106,7 +106,7 @@ WHERE MT.QuantityInStock <= 5 AND MT.QuantityInStock > 0");
 
                                     echo "<div class='form-group'>";
                                     echo "<label for='reorder_supplier" . $row['m_id'] . "'>Supplier</label>";
-                                    echo "<input type='text' class='form-control' id='reorder_supplier" . $row['m_id'] . "' name='supplier' value='" . $row['supplierName'] . "' readonly>";
+                                    echo "<input type='text' class='form-control' id='reorder_supplier" . $row['m_id'] . "' name='supplier' value='" . $row['id'] . "' readonly>";
                                     echo "</div>";
 
                                     echo "<div class='form-group'>";
