@@ -248,8 +248,8 @@
                             <td><?php echo htmlspecialchars($row['services_name']); ?></td>
                             <td><?php if ($row['status'] == 'Request') {
                                        echo '<span class="badge bg-danger p-2" style="font-size: 1rem;">Request</span>';
-                                   } elseif ($row['status'] == 'Accept') {
-                                       echo '<span class="badge bg-success p-2" style="font-size: 1rem;">Accept</span>';
+                                   } elseif ($row['status'] == 'Completed') {
+                                       echo '<span class="badge bg-success p-2" style="font-size: 1rem;">Completed</span>';
                                    } elseif ($row['status'] == 'Decline') {
                                     echo '<span class="badge bg-danger p-2" style="font-size: 1rem;">Reject</span>';
                                 }else {

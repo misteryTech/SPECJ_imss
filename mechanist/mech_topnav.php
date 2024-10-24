@@ -3,7 +3,7 @@
 <div class="d-flex align-items-center justify-content-between">
   <a href="mech_dashboard.php" class="logo d-flex align-items-center">
     <img src="assets/img/logo.png" alt="">
-    <span class="d-none d-lg-block">Administrator</span>
+    <span class="d-none d-lg-block">Mechanist</span>
   </a>
   <i class="bi bi-list toggle-sidebar-btn"></i>
 </div><!-- End Logo -->
@@ -14,7 +14,7 @@
     <button type="submit" title="Search"><i class="bi bi-search"></i></button>
   </form>
 </div><!-- End Search Bar -->
-
+  
 <nav class="header-nav ms-auto">
   <ul class="d-flex align-items-center">
 

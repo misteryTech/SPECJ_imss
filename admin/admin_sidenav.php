@@ -24,12 +24,6 @@
       </li>
 
 
-      <li>
-        <a href="schedule_services_page.php">
-          <i class="bi bi-circle"></i><span>Schedule Service</span>
-        </a>
-      </li>
-
 
 
       <li>

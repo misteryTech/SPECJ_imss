@@ -5,7 +5,7 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="store.php">Store</a></li>
+                    <li class="nav-item"><a class="nav-link" href="store.php">Product</a></li>
                     <li class="nav-item"><a class="nav-link" href="services.php">Services</a></li>
 
                     <li class="nav-item"><a class="nav-link" href="customer_login.php">Login</a></li>
