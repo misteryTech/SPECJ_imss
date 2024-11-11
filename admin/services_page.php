@@ -83,7 +83,7 @@
                                 </thead>
                                 <tbody>
                                     <?php
-                                        $stmt = $connection->prepare("SELECT * FROM services_tbl");
+                                        $stmt = $connection->prepare("SELECT * FROM services_tbl WHERE archive='0' ");
                                         $stmt->execute();
                                         $result = $stmt->get_result();
                                         $count = 1;
@@ -166,13 +166,13 @@
 
                                             echo "</div>";
                                             echo "<div class='modal-body'>";
-                                            echo "<p>Are you sure you want to delete this service?</p>";
+                                            echo "<p>Are you sure you want to archive this service?</p>";
                                             echo "</div>";
                                             echo "<div class='modal-footer'>";
 
                                             echo "<form action='process_code/service_delete.php' method='POST' style='display:inline;'>";
                                             echo "<input type='hidden' name='services_id' value='" . $row['id'] . "'>";
-                                            echo "<button type='submit' class='btn btn-danger'>Delete</button>";
+                                            echo "<button type='submit' class='btn btn-danger'>archive</button>";
                                             echo "<button type='button' class='btn btn-secondary' data-dismiss='modal'>Cancel</button>";
                                             echo "</form>";
                                             echo "</div>";

@@ -8,6 +8,21 @@
       <span>Dashboard</span>
     </a>
   </li><!-- End Dashboard Nav -->
+  
+  <li class="nav-item">
+    <a class="nav-link collapsed" href="walk_in_service.php">
+      <i class="bi bi-truck"></i>
+      <span>Walk in Services</span>
+    </a>
+  </li><!-
+
+
+  <li class="nav-item">
+    <a class="nav-link collapsed" href="walk_in_purchased.php">
+      <i class="bi bi-currency-dollar"></i>
+      <span>Walk in Purchased</span>
+    </a>
+  </li><!-
 
 
   <li class="nav-item">
@@ -49,9 +64,12 @@
 
 
 
+
+
+
   <li class="nav-item">
     <a class="nav-link collapsed" data-bs-target="#Inventory-nav" data-bs-toggle="collapse" href="#">
-      <i class="bi bi-menu-button-wide"></i><span>Inventory Management</span><i class="bi bi-chevron-down ms-auto"></i>
+      <i class="bi bi-menu-button-wide"></i><span>Inventory Report</span><i class="bi bi-chevron-down ms-auto"></i>
     </a>
     <ul id="Inventory-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
     <li>
@@ -96,7 +114,7 @@
     </ul>
   </li><!-- End Components Nav -->
 
-
+<!-- 
   <li class="nav-item">
     <a class="nav-link collapsed" data-bs-target="#Supplier-nav" data-bs-toggle="collapse" href="#">
       <i class="bi bi-building"></i><span>Supplier Management</span><i class="bi bi-chevron-down ms-auto"></i>
@@ -121,7 +139,7 @@
 
 
     </ul>
-  </li><!-- End Components Nav -->
+  </li> -->
 
 
   <li class="nav-item">

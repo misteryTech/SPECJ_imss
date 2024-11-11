@@ -97,7 +97,7 @@
                                 </div>
 
                                 <div class="col-md-4">
-                                    <label for="manufacturer" class="form-label">Brand</label>
+                                    <label for="manufacturer" class="form-label">Brand Name</label>
                                     <select class="form-control" id="manufacturer" name="manufacturer">
                                         <option value="">Select a Brand</option>
                                         <option value="Rusi">Rusi</option>
@@ -129,10 +129,24 @@
                                     <input type="number" class="form-control" id="price" name="price">
                                 </div>
 
-                                <div class="col-md-4">
+                                <div class="col-md-2">
                                     <label for="quantity_stock" class="form-label">Quantity in Stock</label>
                                     <input type="number" class="form-control" id="quantity_stock" name="quantity_stock">
                                 </div>
+
+                                
+                                <div class="col-md-2">
+                                    <label for="quantity_stock" class="form-label">Unit</label>
+                                    <select class="form-control" id="unit" name="unit">
+                                        <option value="" disabled>Unit</option>
+                                        <option value="Pcs">Pieces</option>
+                                        <option value="Set">Set</option>
+                                        <option value="Roll">Roll</option>
+                                        <option value="Pack">Pack</option>
+                                      
+                                    </select>
+                                </div>
+
 
                                     <div class="col-md-4">
                                     <label for="customer_name" class="form-label">Supplier</label>
@@ -189,7 +203,7 @@
                                    SELECT mp.*, s.supplierName, mp.parts_name, mp.parts_number, mp.price, mp.QuantityInStock, mp.manufacturer
                                    FROM motorparts_tbl mp
                                       INNER JOIN suppliers_tbl s ON mp.supplier = s.id
-                                       ");
+                                    WHERE mp.archive='0' ");
                                     $stmt->execute();
                                     $result = $stmt->get_result();
                                     $count = 1;
@@ -206,7 +220,7 @@
                                             echo "<td>".$row['manufacturer']."</td>";
                                             echo "<td>";
                                             echo "<button class='btn btn-primary' data-toggle='modal' data-target='#editModal" . $row['m_id'] . "'>Edit</button> ";
-                                            echo "<button class='btn btn-danger' data-toggle='modal' data-target='#deleteModal" . $row['m_id'] . "'>Delete</button>";
+                                            echo "<button class='btn btn-danger' data-toggle='modal' data-target='#deleteModal" . $row['m_id'] . "'>Archive</button>";
                                             echo "</td>";
                                             echo "</tr>";
 
@@ -310,11 +324,11 @@
                                             echo "<div class='modal-dialog'>";
                                             echo "<div class='modal-content'>";
                                             echo "<div class='modal-header'>";
-                                            echo "<h5 class='modal-title' id='deleteModalLabel" . $row['m_id'] . "'>Delete Service</h5>";
+                                            echo "<h5 class='modal-title' id='deleteModalLabel" . $row['m_id'] . "'>Delete Parts</h5>";
                                             echo "<button type='button' class='btn-close' data-dismiss='modal' aria-label='Close'></button>";
                                             echo "</div>";
                                             echo "<div class='modal-body'>";
-                                            echo "<p>Are you sure you want to delete this service?</p>";
+                                            echo "<p>Are you sure you want to Archive this Parts?</p>";
                                             echo "</div>";
                                             echo "<div class='modal-footer'>";
 
@@ -323,7 +337,7 @@
                                             
                                             echo "<form action='process_code/parts_delete.php' method='POST' style='display:inline;'>";
                                             echo "<input type='hidden' name='m_id' value='" . $row['m_id'] . "'>";
-                                            echo "<button type='submit' class='btn btn-danger'>Delete</button>";
+                                            echo "<button type='submit' class='btn btn-danger'>Archive</button>";
                                             echo "<button type='button' class='btn btn-secondary' data-dismiss='modal'>Cancel</button>";
                                             echo "</form>";
 

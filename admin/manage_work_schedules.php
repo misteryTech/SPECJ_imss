@@ -102,7 +102,7 @@ include("admin_sidenav.php");
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>
-                                            <th scope="col">Schedule Id</th>
+                                            <th scope="col">Service Id</th>
                                             <th scope="col">Services Name</th>
                                             <th scope="col">Mechanist Name</th>
                                         </tr>
@@ -165,7 +165,7 @@ include("admin_sidenav.php");
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>
-                                            <th scope="col">Schedule Id</th>
+                                            <th scope="col">Service Id</th>
                                             <th scope="col">Services Name</th>
                                             <th scope="col">Mechanist Name</th>
                                         </tr>
@@ -229,9 +229,10 @@ include("admin_sidenav.php");
                                     <thead>
                                         <tr>
                                         <th scope="col">#</th>
-                                            <th scope="col">Schedule Id</th>
+                                            <th scope="col">Service Id</th>
                                             <th scope="col">Services Name</th>
                                             <th scope="col">Mechanist Name</th>
+                                            <th scope="col">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -272,6 +273,7 @@ include("admin_sidenav.php");
                                          echo "<td>" . $row['sched_service_id'] . "</td>";
                                          echo "<td>" . $row['services_name'] . "</td>";
                                          echo "<td>" . $row['mechanist_name'] . "</td>";
+                                         echo "<td><a href='release_parts_page.php?sched_id=" . urlencode($row['sched_service_id']) . "'>Release Item</a></td>";
 
 
                                          echo "</tr>";
@@ -294,7 +296,7 @@ include("admin_sidenav.php");
                                     <thead>
                                         <tr>
                                         <th scope="col">#</th>
-                                            <th scope="col">Schedule Id</th>
+                                            <th scope="col">Service Id</th>
                                             <th scope="col">Services Name</th>
                                             <th scope="col">Mechanist Name</th>
                                     </thead>

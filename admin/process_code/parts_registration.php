@@ -12,6 +12,8 @@
         $status = $_POST["condition"];
         $services_type = $_POST["services_type"];
         $date_expired = $_POST["date_expired"];
+        $unit = $_POST["unit"];
+        $archived = "0";
 
         // Handle image upload
         $target_dir = "uploads/";
@@ -52,8 +54,8 @@
         if ($uploadOk == 1) {
             if (move_uploaded_file($_FILES["parts_image"]["tmp_name"], $target_file)) {
                 // Insert into database
-                $stmt = $connection->prepare("INSERT INTO motorparts_tbl (parts_name, parts_number, category, manufacturer, price, QuantityInStock, supplier, services_type, status, image_path, date_expired) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-                $stmt->bind_param("ssssdisssss", $parts_name, $parts_number, $category, $manufacturer, $price, $quantity_stock, $supplier, $services_type, $status, $target_file, $date_expired);
+                $stmt = $connection->prepare("INSERT INTO motorparts_tbl (parts_name, parts_number, category, manufacturer, price, QuantityInStock, supplier, services_type, status, image_path, date_expired, unit, archive) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                $stmt->bind_param("ssssdisssssss", $parts_name, $parts_number, $category, $manufacturer, $price, $quantity_stock, $supplier, $services_type, $status, $target_file, $date_expired, $unit, $archived);
 
                 if ($stmt->execute()) {
                     echo "<script>alert('Registration Successful.');</script>";
