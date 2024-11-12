@@ -118,6 +118,12 @@ $result = mysqli_query($connection, $query);
 </section>
 </main>
 
+
+<?php
+      include("admin_footer.php");
+?>
+
+
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     const cartTable = document.getElementById('selectedPartsTable').getElementsByTagName('tbody')[0];
